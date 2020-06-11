@@ -1,0 +1,130 @@
+// Background
+.bg {
+  &-primary {
+    @include set-background($primary-color);
+  }
+  &-dark {
+    @include set-background($dark-color);
+    border: #ccc 1px solid;
+  }
+  &-light {
+    @include set-background($light-color);
+  }
+  &-danger {
+    @include set-background($danger-color);
+  }
+  &-white {
+    @include set-background(#fff);
+    border: #ccc 1px solid;
+  }
+
+}
+
+//CONTAINER
+.container {
+  display: flex;
+  height: 100vh;
+
+  &-center {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+//ЧТо за херня?
+.flex-container {
+  display: flex;
+  flex-direction: column;
+
+  &-center {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+// Text styles
+.x-large {
+  font-size: 4rem;
+  margin-bottom: 10px;
+}
+.lead {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.text-primary {
+  color: $primary-color;
+}
+
+//Buttons
+.btn {
+  @include set-background($white-color);
+  padding: 0.5rem 1.5rem;
+  font: inherit;
+  color: inherit;
+  margin: 0.5rem;
+  border: none;
+  width: 200px;
+  border-radius: 5px;
+  text-decoration: none;
+  outline: none;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+  &-large-text{
+    font-size: 3rem;
+  }
+  &-medium-text{
+    font-size: 2rem;
+  }
+  &-small-text{
+    font-size: 1rem;
+  }
+  &:hover {
+      background: lighten(black, 80%)
+  }
+  &-primary {
+    @include set-background($primary-color);
+    &:hover {
+      background: lighten($primary-color, 10%)
+    }
+  }
+  &-danger {
+    @include set-background($danger-color);
+    &:hover {
+      background: darken($danger-color, 20%);
+      color: $white-color;
+    }
+  }
+  &-dark {
+    @include set-background($dark-color);
+    &:hover {
+      background: darken($dark-color, 20%)
+    }
+  }
+}
+//dividers
+.divider {
+  display: flex;
+  border: 1px solid #bbb;
+  margin: 2rem;
+}
+
+//ul table cells
+.table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  li {
+    display: flex;
+    justify-content: center;
+  }
+
+}
+.avatar {
+  width: 100%;
+  margin: 0.8rem;
+}

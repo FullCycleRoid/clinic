@@ -1,0 +1,137 @@
+@import "config";
+@import "utilities";
+@import "default";
+@import "media_query";
+@import "form";
+@import "tests";
+
+//NAVBARs
+.navbar {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  opacity: 0.8;
+  ul {
+    display: flex;
+  }
+  a {
+    padding: 0.45rem;
+    margin: 0 0.5rem;
+    color: white;
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+.sidebar {
+  margin-top: 6em;
+  top: 100px;
+  left: 0;
+  flex: 0 0 auto;
+  a {
+    padding: 1em ;
+    display: block;
+    background-color: $dark-color;
+    transition: all 0.2s ease-in;
+    box-shadow: 0px 0px 8px 2px #000000;
+
+    &:hover {
+      background: lighten($dark-color, 80%)
+    }
+  }
+}
+.main {
+  margin-top: 5em;
+  padding: 0 2rem;
+  flex: 1 1 auto;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+//LANDING
+.landing {
+  @include set-background($primary-color);
+  position:relative;
+  height:100vh;
+
+  &-inner {
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin:auto;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.dark-overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+//CONTENT
+//index page content
+.content {
+  display: grid;
+  padding: 2rem;
+  grid-gap: 2rem;
+  line-height: 1.8rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  overflow: hidden;
+
+  &-right {
+      grid-template-columns: 2fr 4fr;
+  }
+
+  &-left {
+      grid-template-columns: 4fr 2fr;
+  }
+
+  &-img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    &:hover {
+      box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    }
+  }
+}
+
+.profile-list {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+  grid-gap: 50px;
+  align-items: center;
+  margin: 1rem;
+  line-height: 1.5rem;
+  font-size: 1.2rem;
+  border: none;
+}
+
+.profile-detail {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  p {
+    padding: 0.4rem;
+    border-radius: 3px;
+    margin: 1rem auto;
+    font-size: 1rem;
+    border: 1px solid #cccccc;
+  }
+}

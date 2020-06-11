@@ -1,0 +1,18 @@
+{% extends 'layout/personal_area.html' %}
+
+{% block content %}
+<div class="flex-container flex-container-center">
+    <h1>Доступные тесты</h1>
+    <p>Выберите один из доступных тестов. Каждый тест направлен на определение вашего текущего состояния и поможет
+    специалисту выбрать лучший метод лечения</p>
+
+    <ul class="table">
+        {% for test in list %}
+            <li>
+                <a href="{% url 'psy_tests:test' id=test.id %}"
+                   class="btn btn-danger btn-small-text">{{ test }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

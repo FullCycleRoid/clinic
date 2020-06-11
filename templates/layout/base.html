@@ -1,0 +1,54 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="#">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+  {% load static %}
+  <link href="{% static 'css/style.css' %}?{% now 'U' %}" rel="stylesheet" >
+
+{#  <link rel="stylesheet" href="../../static/css/normalize.css">#}
+{#  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">#}
+  <meta name="theme-color" content="#fafafa">
+{#  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">#}
+
+{#  <script src="https://kit.fontawesome.com/e54e312ccd.js" crossorigin="anonymous"></script>#}
+
+</head>
+
+<body>
+  <div class="navbar bg-primary">
+    <h1><a href="{% url 'core:index' %}">LOGO</a></h1>
+    <ul>
+      <li><a href="#">link</a></li>
+      <li><a href="#">link</a></li>
+        {% if request.user.is_authenticated %}
+          <li><a href="{% url 'core:sign_out' %}">Выйти</a></li>
+          <li><a href="{% url 'core:profile' %}">Профиль</a></li>
+        {% else %}
+          <li><a href="{% url 'core:sign_in' %}">Войти</a></li>
+          <li><a href="{% url 'core:sign_up' %}">Зарегистрироваться</a></li>
+        {% endif %}
+    </ul>
+  </div>
+  {% block main %}
+{#      main content#}
+  {% endblock %}
+
+{#  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>#}
+{#  <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>#}
+{#  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>#}
+{#  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>#}
+{#  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>#}
+{#  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>#}
+{#  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>#}
+{#  <script src="../../static/js/main.js"></script>#}
+{#  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>#}
+
+</body>
+</html>

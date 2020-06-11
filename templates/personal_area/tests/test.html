@@ -1,0 +1,83 @@
+{% extends 'layout/personal_area.html' %}
+{% load static %}
+{% block content %}
+<div class="flex-container flex-container-center">
+    <h1>{{ test.title }}</h1>
+    <div id="test-info">
+        <p>{{ test.description }}</p>
+    </div>
+    <div id="qtlTimer">
+
+    </div>
+
+    <a href="" id='start-test-btn' class="btn btn-small-text btn-danger">Пройти тест</a>
+    <div id="test"></div>
+    <div id="result"></div>
+
+    <div id="question_list" style="display: none">
+        {{ questions }}
+    </div>
+<div id="container">
+
+</div>
+
+</div>
+
+    <ul>
+        <li></li>
+        <ul>
+            <li>
+                <ul>
+                    <li></li>
+                </ul>
+            </li>
+            <li></li>
+            <li></li>
+        </ul>
+    </ul>
+
+<script>
+let data = {
+      "Рыбы": {
+        "форель": {},
+        "лосось": {}
+      },
+
+      "Деревья": {
+        "Огромные": {
+          "секвойя": {},
+          "дуб": {}
+        },
+        "Цветковые": {
+          "яблоня": {},
+          "магнолия": {}
+        }
+      }
+    };
+let container = document.querySelector('#container')
+
+function createTree(container, obj) {
+    container.innerHTML = createTreeText(obj)
+}
+
+function createTreeText(obj) {
+    let ul;
+    let li = ''
+
+    for (let item in obj) {
+        li += '<li>' + item + createTreeText(obj[item]) + '</li>'
+        console.log(li)
+    }
+    if (li) {
+        ul = '<ul>' + li + '</ul>'
+    }
+    return ul || '';
+}
+
+createTree(container, data);
+
+
+</script>
+
+<script src="{% static 'js/test.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.4rem;
+}
+
+ul[class] {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: $primary-color;
+}
+
+h1 {
+  margin: 0.5rem 0 ;
+  padding: 0;
+}

@@ -1,0 +1,12 @@
+{% extends 'layout/personal_area.html' %}
+
+{% block content %}
+<div class="flex-container flex-container-center">
+    <h1>{{ test.title }}</h1>
+    <p>{{ question }}</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+    </form>
+</div>
+{% endblock %}
