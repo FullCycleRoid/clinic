@@ -19,3 +19,17 @@
     padding: 0.4rem;
   }
 }
+
+.success {
+  background-color: $primary-color;
+  text-align: center;
+  margin: 1rem 0 ;
+  padding: 1rem;
+}
+
+.error {
+  background-color: $danger-color;
+  text-align: center;
+  margin: 1rem 0 ;
+  padding: 1rem;
+}

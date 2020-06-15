@@ -25,8 +25,7 @@ SECRET_KEY = '6!j2x1*&uf^ummx)0g5=*-1ybrk^w6w@s&8!-g&=a&la$jewse'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -38,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admindocs',
+    'social_django',
     'core',
     'django_extensions',
     'bootstrap4',
@@ -61,8 +61,7 @@ ROOT_URLCONF = 'clinic2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,13 +69,22 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends'
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'clinic2.wsgi.application'
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.vk.VKOAuth2',    # бекенд авторизации через ВКонтакте
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
 
+    'django.contrib.auth.backends.ModelBackend', # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
+)
+
+WSGI_APPLICATION = 'clinic2.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -87,7 +95,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -107,7 +114,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -120,7 +126,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -135,11 +140,9 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-
 AUTH_USER_MODEL = 'core.CustomUser'
 
-DATE_INPUT_FORMATS = ['%d %m %Y', ]
+DATE_INPUT_FORMATS = ['%d %m %Y', '%d-%m-%Y', '%Y-%m-%d', ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -150,3 +153,15 @@ EMAIL_HOST_USER = 'me@gmail.com'
 EMAIL_HOST_PASSWORD = 'password'
 DEFAULT_FROM_EMAIL = 'Task Board'
 DEFAULT_TO_EMAIL = 'localhost@gmail.com'
+
+
+LOGIN_REDIRECT_URL = 'main/'
+
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = 'ID приложения'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'Защищённый ключ'
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']

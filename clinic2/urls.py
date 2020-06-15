@@ -21,10 +21,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
+    path('', include('social_django.urls', namespace='social')),
     path('', include('core.urls')),
     path('', include('personal_area.urls')),
     path('', include('psy_tests.urls')),
     path('_nested_admin/', include('nested_admin.urls')),
+    path('social-auth/', include('social_django.urls', namespace='social')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

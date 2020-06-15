@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>{% block title %}{% endblock %}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="#">
@@ -23,7 +23,11 @@
 
 <body>
   <div class="navbar bg-primary">
-    <h1><a href="{% url 'core:index' %}">LOGO</a></h1>
+    {% if request.user.is_authenticated %}
+        <h1><a href="{% url 'personal_area:index' %}">LOGO</a></h1>
+    {% else %}
+        <h1><a href="{% url 'core:index' %}">LOGO</a></h1>
+    {% endif %}
     <ul>
       <li><a href="#">link</a></li>
       <li><a href="#">link</a></li>

@@ -139,7 +139,7 @@ body {
   font-size: 1.4rem;
 }
 
-ul[class] {
+ul {
   list-style: none;
 }
 
@@ -188,6 +188,20 @@ h1 {
 }
 .form-text {
   padding: 0.4rem;
+}
+
+.success {
+  background-color: #44c767;
+  text-align: center;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+.error {
+  background-color: #FF4900;
+  text-align: center;
+  margin: 1rem 0;
+  padding: 1rem;
 }
 
 #qtlResult {

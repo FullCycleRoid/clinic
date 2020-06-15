@@ -1,5 +1,6 @@
 import re
 from django import forms
+from clinic2 import settings
 from .models import CustomUser, Patient
 
 
@@ -45,12 +46,28 @@ class RegistrationForm(forms.Form):
 
 
 class PatientForm(forms.ModelForm):
+    birth_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS,
+                                 widget=forms.DateTimeInput(format="%d %m %Y",
+                                                            attrs={'placeholder': '01 02 1990'}))
+    phone_number = forms.CharField(label='Мобильный телефон',
+                                   min_length=10,
+                                   max_length=15,
+                                   widget=forms.TextInput(attrs={'placeholder': '+7 921 321 14 28'}))
 
     class Meta:
         model = Patient
         fields = ('name', 'surname', 'third_name', 'birth_date',
-                  'address', 'mobile_phone', 'diagnose', 'user')
+                  'address', 'phone_number', 'user', 'avatar', 'birth_date')
         widgets = {'user': forms.HiddenInput}
+
+    def clean_phone_number(self):
+        value = self.cleaned_data['phone_number']
+        pattern = re.compile(r'(^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$)')
+        result = pattern.match(value)
+
+        if not result:
+            raise forms.ValidationError('Invalid phone number', code='Invalid')
+        return result.group()
 
 
 class DoctorSignUpRequestForm(forms.Form):
@@ -60,13 +77,11 @@ class DoctorSignUpRequestForm(forms.Form):
                                    max_length=15,
                                    widget=forms.TextInput(attrs={'placeholder': '+7 921 321 14 28'}))
 
-
     def clean_phone_number(self):
         value = self.cleaned_data['phone_number']
         pattern = re.compile(r'(^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$)')
         result = pattern.match(value)
-        print(pattern)
-        print(result)
+
         if not result:
             raise forms.ValidationError('Invalid phone number', code='Invalid')
         return result.group()

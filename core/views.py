@@ -1,14 +1,32 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, Http404
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetDoneView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
-from django.views.generic import TemplateView, CreateView, UpdateView, FormView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import TemplateView, UpdateView
 from .forms import LoginForm, RegistrationForm, PatientForm, DoctorSignUpRequestForm
 from .models import CustomUser, Patient
 from .utilities import send_signup_request
-from personal_area import views
+
+
+class ErrorMessageMixin:
+    """
+    Add a success message on successful form submission.
+    """
+    error_message = ''
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        error_message = self.get_error_message(form.cleaned_data)
+        if error_message:
+            messages.error(self.request, error_message)
+        return response
+
+    def get_error_message(self, cleaned_data):
+        return self.error_message % cleaned_data
+
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -28,6 +46,7 @@ def login_view(request):
             if user:
                 login(request, user)
                 return render(request, 'personal_area/index.html')
+
             return render(request, 'registration/signin.html', {'form': form})
         else:
             form = LoginForm()
@@ -64,11 +83,13 @@ def signout_view(request):
     return redirect("core:index")
 
 
-class ProfileView(UpdateView):
+class ProfileView(SuccessMessageMixin, UpdateView):
     form_class = PatientForm
     model = Patient
     template_name = 'profile/profile.html'
-    success_url = '/'
+    success_url = '/profile/'
+    success_message = 'Профиль успешно сохранен'
+    error_message = 'Что то пошло не так'
 
     def get_object(self, queryset=None):
         return self.request.user.patient
@@ -76,7 +97,7 @@ class ProfileView(UpdateView):
     def get_context_data(self, **kwargs):
         instance = get_object_or_404(Patient, user=self.request.user)
         context = super(ProfileView, self).get_context_data(**kwargs)
-        context['form_class'] = self.form_class(self.request.POST, instance=instance)
+        context['form_class'] = self.form_class(self.request.POST, self.request.FILES, instance=instance)
         return context
 
 
@@ -162,3 +183,15 @@ def index_or_personal_area(request):
     else:
         return HttpResponseRedirect(reverse('core:index'))
 
+
+class UserPasswordChangeView(PasswordChangeView):
+      success_url = 'done/'
+
+
+class EmailPasswordResetView(PasswordResetView):
+    success_url = reverse_lazy('core:password_reset_done')
+    email_template_name = 'registration/password_reset_email.html'
+
+
+class EmailPasswordResetDoneView(PasswordResetDoneView):
+    success_url = reverse_lazy('core:password_reset_complete')

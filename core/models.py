@@ -68,9 +68,9 @@ class Profile(models.Model):
     name = models.CharField(max_length=20, verbose_name='Имя', blank=True, null=True)
     surname = models.CharField(max_length=20, verbose_name='Фамилия', blank=True, null=True)
     third_name = models.CharField(max_length=20, verbose_name='Отчество', blank=True, null=True)
-    birth_date = models.DateField(blank=True, null=True)
+    birth_date = models.DateField(blank=True, null=True, verbose_name='Дата рождения')
     address = models.CharField(max_length=200, verbose_name='Адрес', blank=True, null=True)
-    mobile_phone = models.IntegerField(verbose_name='Номер телефона', blank=True, null=True)
+    phone_number = models.IntegerField(verbose_name='Номер телефона', blank=True, null=True)
     # https: // github.com / matthewwithanm / django - imagekit
     # в дальнейщем исползовать данный пакет работы с изображениями
     avatar = models.ImageField(upload_to='images/avatars/%Y/%m/%d/',

@@ -30,7 +30,20 @@
             <input type='submit' value="Submit">
         </form>
 
+    <div class="social">
+         <ul>
+             <li class="facebook"><a href="{% url "social:begin" "facebook" %}">
+             Signin with Facebook</a></li>
+             <li class="vk">
+                 <a href="/login/vk-oauth2"><img src="/static/lvk.png" class="avatar-3" data-toggle="tooltip" title="Войти через VK"></a>
+             </li>
+             <li class="google"><a href="{% url "social:begin" "google-oauth2" %}">
+             Signin with Google</a></li>
+         </ul>
     </div>
-  <p class="form-text">Do you have already account? <a href="">Sing Up</a></p>
+
+    </div>
+  <p class="form-text"><a href="{% url "core:password_reset" %}">Забыли пароль?</a></p>
+  <p class="form-text">Нужен аккаунт? <a href="{% url "core:sign_up" %}"> Зарегистрироваться</a></p>
 </section>
 {% endblock %}
