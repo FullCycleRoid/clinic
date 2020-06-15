@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'personal_area',
     'psy_tests',
     'nested_admin',
+    'upload_image',
 ]
 
 MIDDLEWARE = [

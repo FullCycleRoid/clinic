@@ -461,6 +461,16 @@ input.qtlAnswerButtonDbl:focus, input.qtlAnswerButtonDbl:active {
   align-items: center;
 }
 
+.two_column_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 2rem 0;
+}
+.two_column_container img {
+  border: 3px solid #bbbbbb;
+  border-radius: 10px;
+}
+
 .landing {
   background-color: #44c767;
   color: #111;
