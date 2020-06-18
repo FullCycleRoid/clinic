@@ -18,12 +18,21 @@
      });
      jQuery('head').append(css);
      // Загрузка HTML.
-     box_html = '<div id="bookmarklet"><a href="#"id="close">&times;</a><h1>Select an image to bookmark:</h1><divclass="images"></div></div>';
+     box_html = '<div id="bookmarklet"><a href="#" id="close">&times;</a><h1>Select an image to bookmark:</h1><div class="images"></div></div>';
      jQuery('body').append(box_html);
      // Добавление скрытия букмарклета при нажатии на крестик.
      jQuery('#bookmarklet #close').click(function(){
      jQuery('#bookmarklet').remove();
      });
+     // Находим картинки на текущем сайте и вставляем их в окно букмарклета.
+     jQuery.each(jQuery('img[src$="jpg"]'), function(index, image) {
+         if (jQuery(image).width() >= min_width && jQuery(image).height() >= min_height){
+         image_url = jQuery(image).attr('src');
+         console.log(image_url)
+         jQuery('#bookmarklet .images').append('<a href="#"><img src="'+image_url +'" alt="123"/></a>');
+         console.log('find all images')
+         }
+    });
  }
  // Проверка, подключена ли jQuery.
  if(typeof(window).jQuery != 'undefined') {
