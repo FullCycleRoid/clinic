@@ -1,42 +1,32 @@
 (function(){
-  var jquery_version = '3.3.1';
-  var site_url = 'http://127.0.0.1:8000/';
-  var static_url = site_url + 'static/';
-  var min_width = 100;
-  var min_height = 100;
-  console.log('Bookmark created')
-  function bookmarklet(msg) {
-    console.log('Css loaded')
-
-    // Загрузка CSS-стилей.
-    var css = jQuery('<link>');
-    css.attr({
-    rel: 'stylesheet',
-    type: 'text/css',
-    href: static_url + 'css/bookmarklet.css?r=' +
-    Math.floor(Math.random()*99999999999999999999)
-    });
-    jQuery('head').append(css);
-    // Загрузка HTML.
-    box_html = '<div id="bookmarklet"><a href="#"id="close">&times;</a>
-    <h1>Select an image to bookmark:</h1><divclass="images"></div></div>';
-    jQuery('body').append(box_html);
-    // Добавление скрытия букмарклета при нажатии на крестик.
-    jQuery('#bookmarklet #close').click(function(){
-    jQuery('#bookmarklet').remove();
- });
- // Находим картинки на текущем сайте и вставляем их в окно букмарклета.
- jQuery.each(jQuery('img[src$="jpg"]'), function(index, image) {
- if (jQuery(image).width() >= min_width && jQuery(image).height() >= min_height){
- image_url = jQuery(image).attr('src');
- jQuery('#bookmarklet .images').append(
- '<a href="#"><img src="'+image_url +'" /></a>'
- );
+ var jquery_version = '3.3.1';
+ var site_url = 'http://127.0.0.1:8000/';
+ var static_url = site_url + 'static/';
+ var min_width = 100;
+ var min_height = 100;
+ console.log('bookmarklet created')
+ function bookmarklet(msg) {
+   // Здесь мы добавим код самого букмарклета.
+     // Загрузка CSS-стилей.
+     console.log('bookmarklet function')
+     var css = jQuery('<link>');
+     css.attr({
+     rel: 'stylesheet',
+     type: 'text/css',
+     href: static_url + 'css/bookmarklet.css?r=' +
+     Math.floor(Math.random()*99999999999999999999)
+     });
+     jQuery('head').append(css);
+     // Загрузка HTML.
+     box_html = '<div id="bookmarklet"><a href="#"id="close">&times;</a><h1>Select an image to bookmark:</h1><divclass="images"></div></div>';
+     jQuery('body').append(box_html);
+     // Добавление скрытия букмарклета при нажатии на крестик.
+     jQuery('#bookmarklet #close').click(function(){
+     jQuery('#bookmarklet').remove();
+     });
  }
-});
-};
  // Проверка, подключена ли jQuery.
-  if(typeofwindow.jQuery != 'undefined') {
+ if(typeof(window).jQuery != 'undefined') {
  bookmarklet();
  } else {
  // Проверка, что атрибут $ окна не занят другим объектом.
@@ -49,7 +39,7 @@
  document.head.appendChild(script);
  // Добавление возможности использовать несколько попыток для загрузки jQuery.
  var attempts = 15;
-  (function(){
+ (function(){
  // Проверка, подключена ли jQuery
  if(typeof window.jQuery == 'undefined') {
  if(--attempts> 0) {
