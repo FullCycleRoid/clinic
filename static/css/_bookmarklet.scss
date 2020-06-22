@@ -52,7 +52,17 @@
     opacity:1;
 }
 
-.image-likes {
+.image-info {
+    display: flex;
+    flex-direction: column;
+    margin: .5rem;
+
+}
+
+.count {
+    margin: 1rem;
+    padding: 20px;
     border: 1px solid #bbbbbb;
     border-radius: 20px;
 }
+

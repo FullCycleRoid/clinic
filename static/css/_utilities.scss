@@ -15,33 +15,8 @@
   }
   &-white {
     @include set-background(#fff);
-    border: #ccc 1px solid;
   }
 
-}
-
-//CONTAINER
-.container {
-  display: flex;
-  height: 100vh;
-
-  &-center {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-//ЧТо за херня?
-.flex-container {
-  display: flex;
-  flex-direction: column;
-
-  &-center {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
 }
 
 // Text styles
@@ -62,8 +37,6 @@
 .btn {
   @include set-background($white-color);
   padding: 0.5rem 1.5rem;
-  font: inherit;
-  color: inherit;
   margin: 0.5rem;
   border: none;
   width: 200px;
@@ -72,16 +45,8 @@
   outline: none;
   transition: all 0.2s ease-in;
   cursor: pointer;
-  &-large-text{
-    font-size: 3rem;
-  }
-  &-medium-text{
-    font-size: 2rem;
-  }
-  &-small-text{
-    font-size: 1rem;
-  }
-  &:hover {
+
+  :hover {
       background: lighten(black, 80%)
   }
   &-primary {
@@ -104,27 +69,40 @@
     }
   }
 }
-//dividers
-.divider {
-  display: flex;
-  border: 1px solid #bbb;
-  margin: 2rem;
-}
 
-//ul table cells
-.table {
-  width: 100%;
+//FLEX CONTAINER
+.container {
   display: flex;
+}
+.flex-column {
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  li {
-    display: flex;
-    justify-content: center;
-  }
-
 }
-.avatar {
-  width: 100%;
-  margin: 0.8rem;
+.flex-row {
+  flex-direction: row;
+}
+.item-center {
+  align-items: center;
+}
+
+.item-start {
+  align-items: start;
+}
+
+.item-end {
+  align-items: end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+.justify-start {
+  justify-content: start;
+}
+
+.justify-end {
+  justify-content: end;
+}
+
+.justify-between {
+  justify-content: space-between;
 }

@@ -23,7 +23,7 @@ class LoginForm(forms.Form):
         return email
 
 
-class RegistrationForm(forms.Form):
+class RegistrationMixin(forms.Form):
     email = forms.CharField(max_length=20, label='Email')
 
     password = forms.CharField(widget=forms.PasswordInput, label='Password')
@@ -43,6 +43,10 @@ class RegistrationForm(forms.Form):
         if password and password1 and password != password1:
             raise forms.ValidationError("Passwords didn't match")
         return password
+
+
+class RegistrationForm(RegistrationMixin):
+    pass
 
 
 class PatientForm(forms.ModelForm):
@@ -85,3 +89,8 @@ class DoctorSignUpRequestForm(forms.Form):
         if not result:
             raise forms.ValidationError('Invalid phone number', code='Invalid')
         return result.group()
+
+
+class DoctorSignUpForm(RegistrationMixin):
+    user_type = forms.CharField(initial='doctor', widget=forms.HiddenInput())
+

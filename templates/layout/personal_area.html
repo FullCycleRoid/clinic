@@ -2,8 +2,8 @@
 
 {% block main %}
 
-<section class="container bg-white">
-  <div class="sidebar">
+<section class="container flex-row">
+  <div class="sidebar item-start">
     <a href="{% url 'core:profile' %}">Личные данные</a>
     <a href="#">Групповые занятия</a>
     <a href="#">Запись к врачу</a>
@@ -16,14 +16,11 @@
     <a href="#">Медитация</a>
     <a href="#">Семейная терапия</a>
   </div>
-  <div class="main">
-    <div class="flex-container flex-container-center">
-      <h1>Личный кабинет</h1>
-      <p>Пользуйтесь на здоровье</p>
+  <div class="main item-center container flex-column">
         {% block content %}
-
+            {% block domready %}{% endblock %}
         {% endblock %}
-    </div>
   </div>
 </section>
+
 {% endblock %}

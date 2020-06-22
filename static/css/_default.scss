@@ -1,28 +1,74 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+body {
+  margin:0;
+  padding:0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.4rem;
+h1, h2, h3, h4, h5 ,h6 {
+  font-family: 'Ubuntu', sans-serif; font-weight:normal;
+}
+
+a {
+  text-decoration: none;
+  color: $white-color;
+}
+
+a.hover {
+  color: #222222;
+}
+
+a.button, input[type='submit'] {
+    @include set-background($primary-color);
+    border-radius:4px;
+    padding:10px 20px;
+    font-size:14px;
+    border:0;
+}
+a.button:hover, input[type='submit']:hover {
+  background-color:darken($primary-color, 20%);
+  color: #bbbbbb;
+}
+
+a.button.dark {
+    @include set-background($dark-color);
+}
+
+.text-left {
+    text-align:left;
+}
+
+.text-right {
+    text-align:right;
+}
+
+
+form p label {
+    font-size:14px;
+    padding-bottom:4px;
+}
+
+form p input {
+    width:300px;
+    font-size:13px;
+    margin-bottom:10px;
+    padding:10px 12px;
+    border:0;
+    background:#efefef;
+    color:#666;
+    border-radius:4px;
 }
 
 ul {
   list-style: none;
 }
 
-img {
-  width: 100%;
+ul.errorlist {
+   float:left;
+   color:#ff0000;
+   clear:both;
+   font-size:13px;
+   margin:0;
+   padding:0;
 }
 
-a {
-  text-decoration: none;
-  color: $primary-color;
-}
 
-h1 {
-  margin: 0.5rem 0 ;
-  padding: 0;
-}

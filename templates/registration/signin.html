@@ -2,48 +2,31 @@
 
 {% load static %}
 {% block main %}
-<section class="container container-center">
-  <h1 class="large text-primary">
-    Sign In
-  </h1>
-  <p class="lead"><i class="fas fa-user"></i>
-  Enter Your Account
-  </p>
-    <div class="form-group">
-        <form method="POST">
-            {% csrf_token %}
-            {% if form.errors %}
-                {% for field in form %}
-                    {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error }}</strong>
-                    </div>
-                    {% endfor %}
-                {% endfor %}
-                {% for error in form.non_field_errors %}
-                    <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                    </div>
-                {% endfor %}
-            {% endif %}
-            {{ form.as_p }}
-            <input type='submit' value="Submit">
-        </form>
-
-    <div class="social">
-         <ul>
-             <li class="facebook"><a href="{% url "social:begin" "facebook" %}">
-             Signin with Facebook</a></li>
-             <li class="vk">
-                 <a href="/login/vk-oauth2"><img src="/static/lvk.png" class="avatar-3" data-toggle="tooltip" title="Войти через VK"></a>
-             </li>
-             <li class="google"><a href="{% url "social:begin" "google-oauth2" %}">
-             Signin with Google</a></li>
-         </ul>
-    </div>
-
-    </div>
+<section class="container horizontal-center">
+  <h1 class="large text-primary">Sign In</h1>
+  <p class="lead">Enter Your Account</p>
+  <div class="form-group">
+    <form method="POST">
+      {% csrf_token %}
+      {% if form.errors %}
+        {% for field in form %}
+          {% for error in field.errors %}
+            <div class="alert alert-danger"><strong>{{ error }}</strong></div>
+          {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+          <div class="alert alert-danger"><strong>{{ error|escape }}</strong></div>
+        {% endfor %}
+      {% endif %}
+      {{ form.as_p }}
+      <input type='submit' value="Submit">
+    </form>
+  </div>
   <p class="form-text"><a href="{% url "core:password_reset" %}">Забыли пароль?</a></p>
   <p class="form-text">Нужен аккаунт? <a href="{% url "core:sign_up" %}"> Зарегистрироваться</a></p>
+  <div id="social">
+      <a href="/login/vk-oauth2"><img src="{% static 'default_images/vk-social-network-logo.png' %}" data-toggle="tooltip" width="64px" height="64px"></a>
+      <a href="{% url "social:begin" "google-oauth2" %}"><img src="{% static 'default_images/brands-and-logotypes.png' %}" data-toggle="tooltip" width="64" height="64"></a>
+  </div>
 </section>
 {% endblock %}

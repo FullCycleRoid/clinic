@@ -22,7 +22,7 @@ def to_dict(instance):
 def psy_test_index_view(request):
     test_list = PsyTest.objects.all()
 
-    return render(request, 'personal_area/tests/test_list.html', {'list': test_list})
+    return render(request, 'personal_area/../templates/tests/test_list.html', {'list': test_list})
 
 
 def psy_test_data(request, id):
@@ -35,7 +35,7 @@ def psy_test_data(request, id):
                       )
     print(data)
 
-    template_name = 'personal_area/tests/test.html'
+    template_name = 'tests/test.html'
     context = {'test': test, 'description': test.description, 'title': test.title, 'questions': data}
 
     response = render(request, template_name, context)

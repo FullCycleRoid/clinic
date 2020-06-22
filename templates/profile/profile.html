@@ -1,16 +1,11 @@
-{% extends 'layout/base.html' %}
+{% extends 'layout/personal_area.html' %}
 
 {% load static %}
 
-{% block main %}
-<section class="container container-center">
-  <h1 class="large text-primary">
-    Профиль
-  </h1>
-  <p class="lead"><i class="fas fa-user"></i>
-    Укажите личные данные
-  </p>
-    <div>
+{% block content %}
+  <h1 class="large text-primary">Профиль</h1>
+  <p class="lead">Укажите личные данные</p>
+  <div>
     {% if messages %}
          <ul class="messages">
          {% for message in messages %}
@@ -39,7 +34,5 @@
         {{ form.as_p }}
         <input type='submit' value="Сохранить">
     </form>
-    </div>
-</section>
-
+  </div>
 {% endblock %}

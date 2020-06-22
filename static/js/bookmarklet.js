@@ -1,6 +1,6 @@
 (function(){
  var jquery_version = '3.3.1';
- var site_url = 'http://127.0.0.1:8000/';
+ var site_url = 'https://expleo.serveousercontent.com';
  var static_url = site_url + 'static/';
  var min_width = 100;
  var min_height = 100;
@@ -26,13 +26,22 @@
      });
      // Находим картинки на текущем сайте и вставляем их в окно букмарклета.
      jQuery.each(jQuery('img[src$="jpg"]'), function(index, image) {
-         if (jQuery(image).width() >= min_width && jQuery(image).height() >= min_height){
-         image_url = jQuery(image).attr('src');
-         console.log(image_url)
-         jQuery('#bookmarklet .images').append('<a href="#"><img src="'+image_url +'" alt="123"/></a>');
-         console.log('find all images')
-         }
+     if (jQuery(image).width() >= min_width && jQuery(image).height() >= min_height){
+     image_url = jQuery(image).attr('src');
+     jQuery('#bookmarklet .images').append('<a href="#"><img src="'+image_url +'" alt="123"/></a>');
+     }
     });
+    // Когда изображение выбрано, добавляем его в список сохраненных картинок на нашем сайте.
+    jQuery('#bookmarklet .images a').click(function(e){
+    selected_image = jQuery(this).children('img').attr('src');
+    console.log(jQuery('title'))
+    console.log(jQuery('title').text())
+    // Скрываем букмарклет.
+    jQuery('#bookmarklet').hide();
+    // Открываем новое окно с формой сохранения изображения.
+    window.open(site_url +'create_image/?url=' + selected_image
+    + '&title=' + encodeURIComponent(jQuery('title').text()))
+});
  }
  // Проверка, подключена ли jQuery.
  if(typeof(window).jQuery != 'undefined') {

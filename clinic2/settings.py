@@ -25,7 +25,7 @@ SECRET_KEY = '6!j2x1*&uf^ummx)0g5=*-1ybrk^w6w@s&8!-g&=a&la$jewse'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1', 'expleo.serveousercontent.com']
 
 # Application definition
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'psy_tests',
     'nested_admin',
     'upload_image',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [

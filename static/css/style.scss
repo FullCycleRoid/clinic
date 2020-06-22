@@ -4,37 +4,24 @@
 @import "media_query";
 @import "form";
 @import "tests";
-@import "bookmarklet.css";
+@import "bookmarklet";
 
-//NAVBARs
-.navbar {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-  top: 0;
-  opacity: 0.8;
-  ul {
-    display: flex;
+#header {
+  h1 {
+    margin-left: 2rem;
   }
-  a {
-    padding: 0.45rem;
-    margin: 0 0.5rem;
-    color: white;
-    &:hover {
-      color: $primary-color;
-    }
+
+  li {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+  }
+  li:last-child {
+    margin-right: 2rem;
   }
 }
 
 .sidebar {
-  margin-top: 6em;
-  top: 100px;
-  left: 0;
+  margin-top: 1rem;
   flex: 0 0 auto;
   a {
     padding: 1em ;
@@ -44,29 +31,12 @@
     box-shadow: 0px 0px 8px 2px #000000;
 
     &:hover {
-      background: lighten($dark-color, 80%)
+      background: lighten($dark-color, 30%)
     }
   }
 }
 .main {
-  margin-top: 5em;
-  padding: 0 2rem;
   flex: 1 1 auto;
-  overflow: auto;
-  justify-content: center;
-  align-items: center;
-}
-
-.two_column_container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 2rem 0;
-
-  img {
-    border: 3px solid #bbbbbb;
-    border-radius: 10px;
-  }
-
 }
 
 
@@ -97,55 +67,9 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-//CONTENT
-//index page content
-.content {
-  display: grid;
-  padding: 2rem;
-  grid-gap: 2rem;
-  line-height: 1.8rem;
-  margin-bottom: 2rem;
-  align-items: center;
-  overflow: hidden;
 
-  &-right {
-      grid-template-columns: 2fr 4fr;
-  }
 
-  &-left {
-      grid-template-columns: 4fr 2fr;
-  }
-
-  &-img {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    &:hover {
-      box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-    }
-  }
-}
-
-.profile-list {
-  display: grid;
-  grid-template-columns: 2fr 4fr 2fr;
-  grid-gap: 50px;
-  align-items: center;
-  margin: 1rem;
-  line-height: 1.5rem;
-  font-size: 1.2rem;
-  border: none;
-}
-
-.profile-detail {
+#social {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  p {
-    padding: 0.4rem;
-    border-radius: 3px;
-    margin: 1rem auto;
-    font-size: 1rem;
-    border: 1px solid #cccccc;
-  }
+  flex-direction: row;
 }
