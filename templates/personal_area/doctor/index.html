@@ -2,5 +2,23 @@
 
 {% block content %}
         <p class="lead">Личный кабинет Врача</p>
-
+        <div id="tabs">
+           <ul>
+              <li><a href="#tabs-1">Личные данные</a></li>
+              <li><a href="#tabs-2">Паспортные данные</a></li>
+              <li><a href="#tabs-3">Образование и опыт работы</a></li>
+           </ul>
+           <div id="tabs-1">
+              <p>Содержимое первой вкладки</p>
+           </div>
+           <div id="tabs-2">
+              <p>Содержимое второй вкладки</p>
+           </div>
+           <div id="tabs-3">
+              <p>Содержимое третей вкладки</p>
+           </div>
+        </div>
+    <script>
+        $('#tabs').tabs();
+    </script>
 {% endblock %}

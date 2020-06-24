@@ -11,6 +11,9 @@
   {% load static %}
   <link href="{% static 'css/style.css' %}?{% now 'U' %}" rel="stylesheet" >
   <meta name="theme-color" content="#222">
+  <link rel="stylesheet" href="{% static 'jquery/jquery-ui.min.css' %}">
+  <script src="{% static 'jquery/external/jquery/jquery.js' %}"></script>
+  <script src="{% static 'jquery/jquery-ui.min.js' %}"></script>
 </head>
 <body>
 <div id="header" class="container justify-between bg-primary">

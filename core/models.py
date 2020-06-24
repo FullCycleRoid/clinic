@@ -1,5 +1,3 @@
-import datetime
-
 from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
@@ -80,6 +78,14 @@ class Profile(models.Model):
         abstract = True
 
 
+class Bio(models.Model):
+    pass
+
+
+class EducationAndExperience(models.Model):
+    pass
+
+
 class Patient(Profile):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     diagnose = models.CharField(max_length=50, verbose_name='Диагноз', blank=True, null=True)
@@ -90,7 +96,7 @@ class Doctor(Profile):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     working_experience = models.CharField(max_length=50, verbose_name='Опыт работы', blank=True, null=True)
     user.user_type = "doctor"
-    appointments_per_hour = models.DecimalField(decimal_places=2, max_digits=10, blank=True,null=True)
+    appointments_per_hour = models.DecimalField(decimal_places=2, max_digits=10, blank=True, null=True)
     specialty = models.CharField(max_length=20, verbose_name='Специализация')
 
 
