@@ -67,58 +67,71 @@ class Profile(models.Model):
     surname = models.CharField(max_length=20, verbose_name='Фамилия', blank=True, null=True)
     third_name = models.CharField(max_length=20, verbose_name='Отчество', blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True, verbose_name='Дата рождения')
-    address = models.CharField(max_length=200, verbose_name='Адрес', blank=True, null=True)
+    citizenship = models.CharField(max_length=50, verbose_name='Гражданство', blank=True, null=True)
+    passport = models.IntegerField(verbose_name='Паспортные данные', blank=True, null=True)
     phone_number = models.IntegerField(verbose_name='Номер телефона', blank=True, null=True)
     # https: // github.com / matthewwithanm / django - imagekit
     # в дальнейщем исползовать данный пакет работы с изображениями
     avatar = models.ImageField(upload_to='images/avatars/%Y/%m/%d/',
                                default='/static/default_img/default.png')
 
-    class Meta:
-        abstract = True
+    city = models.CharField(max_length=50, verbose_name='Город', blank=True, null=True)
+    street = models.CharField(max_length=50, verbose_name='Улица', blank=True, null=True)
+    apartment = models.CharField(max_length=50, verbose_name='Квартира', blank=True, null=True)
+    address = models.CharField(max_length=150, verbose_name='Полный адрес', blank=True, null=True)
+
+    def full_address(self):
+        self.address = f'{self.city}, {self.street}, {self.apartment}'
+        return f'{self.city}, {self.street}, {self.apartment}'
+
+    def save(self, *args, **kwargs):
+        self.full_address()
+        super().save(*args, **kwargs)
 
 
-class Bio(models.Model):
-    pass
-
-
-class EducationAndExperience(models.Model):
-    pass
-
-
-class Patient(Profile):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    diagnose = models.CharField(max_length=50, verbose_name='Диагноз', blank=True, null=True)
-    user.user_type = "patient"
-
-
-class Doctor(Profile):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+class DoctorProfile(Profile):
     working_experience = models.CharField(max_length=50, verbose_name='Опыт работы', blank=True, null=True)
-    user.user_type = "doctor"
     appointments_per_hour = models.DecimalField(decimal_places=2, max_digits=10, blank=True, null=True)
     specialty = models.CharField(max_length=20, verbose_name='Специализация')
 
 
-class Appointment(models.Model):
-    TIMESLOT_LIST = (
-        (1, '10:00 – 11:00'),
-        (2, '11:00 – 12:00'),
-        (3, '12:00 – 13:00'),
-        (4, '13:00 – 14:00'),
-        (5, '14:00 – 15:00'),
-        (6, '15:00 – 16:00'),
-        (7, '16:00 – 17:00'),
-        (8, '17:00 – 18:00'),
-        (8, '18:00 – 19:00'),
-    )
+class PatientProfile(Profile):
+    diagnose = models.CharField(max_length=50, verbose_name='Диагноз', blank=True, null=True)
 
-    timeslot = models.IntegerField(choices=TIMESLOT_LIST, null=True)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor')
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient')
 
-    def __str__(self):
-        return str(self.doctor) + " " + str(self.patient) + " - " + str(self.get_timeslot_display())
+class MedicalRecords(models.Model):
+    pass
+
+
+class Patient(PatientProfile):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user.user_type = "patient"
+
+
+class Doctor(DoctorProfile):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user.user_type = "doctor"
+
+
+# class Appointment(models.Model):
+#     TIMESLOT_LIST = (
+#         (1, '10:00 – 11:00'),
+#         (2, '11:00 – 12:00'),
+#         (3, '12:00 – 13:00'),
+#         (4, '13:00 – 14:00'),
+#         (5, '14:00 – 15:00'),
+#         (6, '15:00 – 16:00'),
+#         (7, '16:00 – 17:00'),
+#         (8, '17:00 – 18:00'),
+#         (8, '18:00 – 19:00'),
+#     )
+#
+#     timeslot = models.IntegerField(choices=TIMESLOT_LIST, null=True)
+#     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor')
+#     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient')
+#
+#     def __str__(self):
+#         return str(self.doctor) + " " + str(self.patient) + " - " + str(self.get_timeslot_display())
 
 
 @receiver(post_save, sender=CustomUser)

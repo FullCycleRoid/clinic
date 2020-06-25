@@ -126,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
   text-decoration: none;
-  color: #ffffff;
+  color: #44c767;
 }
 
 a.hover {
@@ -511,9 +511,15 @@ input.qtlAnswerButtonDbl:focus, input.qtlAnswerButtonDbl:active {
 #header h1 {
   margin-left: 2rem;
 }
+#header h1 a {
+  color: white;
+}
 #header li {
   font-size: 1.5rem;
   padding: 0.5rem;
+}
+#header li a {
+  color: white;
 }
 #header li:last-child {
   margin-right: 2rem;

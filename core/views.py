@@ -1,13 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetDoneView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, UpdateView
-from .forms import LoginForm, RegistrationForm, PatientForm, DoctorSignUpRequestForm, DoctorSignUpForm
-from .models import CustomUser, Patient
+from .forms import LoginForm, RegistrationForm, DoctorSignUpRequestForm, DoctorSignUpForm, BioForm
+from .models import CustomUser, Doctor
 from .utilities import send_signup_request
 
 
@@ -92,22 +93,44 @@ def signout_view(request):
     return redirect("core:index")
 
 
-class ProfileView(SuccessMessageMixin, UpdateView):
-    form_class = PatientForm
-    model = Patient
-    template_name = 'profile/profile.html'
-    success_url = '/profile/'
-    success_message = 'Профиль успешно сохранен'
-    error_message = 'Что то пошло не так'
+# class DoctorProfileView(SuccessMessageMixin, UpdateView):
+#     form_class = BioForm
+#     model = Doctor
+#     template_name = 'profile/profile.html'
+#     success_url = '/profile/'
+#     success_message = 'Профиль успешно сохранен'
+#     error_message = 'Что то пошло не так'
+#
+#     def get_object(self, queryset=None):
+#         return self.request.user.doctor
+#
+#     def get_context_data(self, **kwargs):
+#         instance = get_object_or_404(Doctor, user=self.request.user)
+#         context = super(DoctorProfileView, self).get_context_data(**kwargs)
+#         print(self.form_class.base_fields)
+#         context['form_class'] = self.form_class(self.request.POST, self.request.FILES, instance=instance)
+#         return context
 
-    def get_object(self, queryset=None):
-        return self.request.user.patient
+def doctor_profile_template_view(request):
+    return render(request, 'personal_area/doctor/profile/profile.html')
 
-    def get_context_data(self, **kwargs):
-        instance = get_object_or_404(Patient, user=self.request.user)
-        context = super(ProfileView, self).get_context_data(**kwargs)
-        context['form_class'] = self.form_class(self.request.POST, self.request.FILES, instance=instance)
-        return context
+
+@login_required()
+def doctor_profile_bio_view(request):
+    if request.method == 'POST':
+        form = BioForm(request.POST, user=request.user)
+        form.user = request.user
+        print(form)
+        print(form.data)
+        print(form.fields)
+        if form.is_valid():
+            form.user = request.user
+            messages.success(request, 'Ннармально все, сохранено')
+            form.save()
+            return render(request, 'profile/profile_bio.html', {'form': form})
+    else:
+        form = BioForm()
+        return render(request, 'profile/profile_bio.html', {'form': form})
 
 
 def doctor_signup_request(request):
@@ -129,8 +152,6 @@ def doctor_signup_request(request):
     else:
         form = DoctorSignUpRequestForm()
         return render(request, 'registration/doctor_signup.html', {'form': form})
-
-
 
 
 def index_or_personal_area(request):

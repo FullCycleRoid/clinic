@@ -9,15 +9,22 @@
 #header {
   h1 {
     margin-left: 2rem;
+    a {
+      color: white;
+    }
   }
 
   li {
     font-size: 1.5rem;
     padding: 0.5rem;
+    a{
+      color: white;
+    }
   }
   li:last-child {
     margin-right: 2rem;
   }
+
 }
 
 .sidebar {
