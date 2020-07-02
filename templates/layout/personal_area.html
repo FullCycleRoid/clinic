@@ -4,9 +4,13 @@
 
 <section class="container flex-row">
   <div class="sidebar item-start">
-    <a href="{% url 'core:profile' %}">Личные данные</a>
+    {% if request.user.patient %}
+        <a href="{% url 'core:patient-profile' %}">Личные данные</a>
+        <a href="{% url 'core:doctor-list' %}">Все врачи</a>
+    {% else %}
+        <a href="{% url 'core:doctor-profile' %}">Личные данные</a>
+    {% endif %}
     <a href="#">Групповые занятия</a>
-    <a href="#">Запись к врачу</a>
     <a href="#">Статьи</a>
     <a href="{% url 'psy_tests:index' %}">Тесты</a>
     <a href="#">Практики</a>
@@ -22,5 +26,4 @@
         {% endblock %}
   </div>
 </section>
-
 {% endblock %}

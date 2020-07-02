@@ -18,7 +18,7 @@
 <body>
 <div id="header" class="container justify-between bg-primary">
     {% if request.user.is_authenticated %}
-        {% if request.user.user_type == 'patien' %}
+        {% if request.user.patient %}
             <h1><a href="{% url 'personal_area:patient_index' %}">LOGO</a></h1>
         {% else %}
             <h1><a href="{% url 'personal_area:doctor_index' %}">LOGO</a></h1>
@@ -26,12 +26,16 @@
     {% else %}
         <h1><a href="{% url 'core:index' %}">LOGO</a></h1>
     {% endif %}
+
     <ul class="container flex-row item-center ">
-      <li><a href="#">link</a></li>
-      <li><a href="#">link</a></li>
+      <li><p>Привет, {{ request.user.email }}</p></li>
         {% if request.user.is_authenticated %}
           <li><a href="{% url 'core:sign_out' %}">Выйти</a></li>
-          <li><a href="{% url 'core:profile' %}">Профиль</a></li>
+          {% if request.user.patient %}
+              <li><a href="{% url 'core:patient-profile' %}">Профиль</a></li>
+          {% else %}
+              <li><a href="{% url 'core:doctor-profile' %}">Профиль</a></li>
+          {% endif %}
         {% else %}
           <li><a href="{% url 'core:sign_in' %}">Войти</a></li>
           <li><a href="{% url 'core:sign_up' %}">Зарегистрироваться</a></li>

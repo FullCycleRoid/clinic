@@ -181,7 +181,6 @@ ul {
 }
 
 ul.errorlist {
-  float: left;
   color: #ff0000;
   clear: both;
   font-size: 13px;
@@ -518,8 +517,10 @@ input.qtlAnswerButtonDbl:focus, input.qtlAnswerButtonDbl:active {
   font-size: 1.5rem;
   padding: 0.5rem;
 }
-#header li a {
+#header li a, #header li p {
   color: white;
+  margin: 0;
+  padding: 0;
 }
 #header li:last-child {
   margin-right: 2rem;
@@ -573,6 +574,20 @@ input.qtlAnswerButtonDbl:focus, input.qtlAnswerButtonDbl:active {
 #social {
   display: flex;
   flex-direction: row;
+}
+
+.card {
+  padding: 1rem;
+  line-height: 1.8;
+  margin: 1rem;
+  border: 1px solid #bbbbbb;
+  width: 1000px;
+}
+.card-content {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+  grid-gap: 2rem;
+  align-items: center;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,7 +1,7 @@
 import nested_admin
 from django.contrib import admin
 from psy_tests.models import PsyTest, Question, Choice
-from .models import CustomUser, Patient, Doctor
+from .models import CustomUser, Doctor
 
 
 class TocChoiceInline(nested_admin.NestedStackedInline):
@@ -22,5 +22,5 @@ class PsyTestAdmin(nested_admin.NestedModelAdmin):
 
 admin.site.register(PsyTest, PsyTestAdmin)
 admin.site.register(CustomUser)
-admin.site.register(Patient)
 admin.site.register(Doctor)
+

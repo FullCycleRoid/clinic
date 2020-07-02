@@ -74,7 +74,6 @@ class Profile(models.Model):
     # в дальнейщем исползовать данный пакет работы с изображениями
     avatar = models.ImageField(upload_to='images/avatars/%Y/%m/%d/',
                                default='/static/default_img/default.png')
-
     city = models.CharField(max_length=50, verbose_name='Город', blank=True, null=True)
     street = models.CharField(max_length=50, verbose_name='Улица', blank=True, null=True)
     apartment = models.CharField(max_length=50, verbose_name='Квартира', blank=True, null=True)
@@ -88,15 +87,24 @@ class Profile(models.Model):
         self.full_address()
         super().save(*args, **kwargs)
 
+    class Meta:
+        abstract = True
+
 
 class DoctorProfile(Profile):
     working_experience = models.CharField(max_length=50, verbose_name='Опыт работы', blank=True, null=True)
     appointments_per_hour = models.DecimalField(decimal_places=2, max_digits=10, blank=True, null=True)
     specialty = models.CharField(max_length=20, verbose_name='Специализация')
 
+    class Meta:
+        abstract = True
+
 
 class PatientProfile(Profile):
     diagnose = models.CharField(max_length=50, verbose_name='Диагноз', blank=True, null=True)
+
+    class Meta:
+        abstract = True
 
 
 class MedicalRecords(models.Model):
@@ -104,12 +112,12 @@ class MedicalRecords(models.Model):
 
 
 class Patient(PatientProfile):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='patient')
     user.user_type = "patient"
 
 
 class Doctor(DoctorProfile):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='doctor')
     user.user_type = "doctor"
 
 

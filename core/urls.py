@@ -3,8 +3,6 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 
-from .views import doctor_profile_bio_view
-
 app_name = 'core'
 
 urlpatterns = [
@@ -14,7 +12,6 @@ urlpatterns = [
     path('signin/', views.login_view, name='sign_in'),
     path('signup/', views.registration_view, name='sign_up'),
     path('signout/', views.signout_view, name='sign_out'),
-
 
     # Реализовать регистрацию врача
     path('doctor_signup/', views.doctor_signup, name='doctor-signup'),
@@ -29,6 +26,7 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
     # doctor profile
-    path('profile/', login_required(views.doctor_profile_template_view), name='profile'),
-    path('bio/', doctor_profile_bio_view, name='profile-bio'),
+    path('doc/profile/', login_required(views.DoctorProfileView.as_view()), name='doctor-profile'),
+    path('patient/profile/', login_required(views.PatientProfileView.as_view()), name='patient-profile'),
+    path('doc_list/', views.DoctorList.as_view(), name='doctor-list'),
 ]

@@ -9,16 +9,19 @@
 #header {
   h1 {
     margin-left: 2rem;
-    a {
+    a{
       color: white;
     }
+
   }
 
   li {
     font-size: 1.5rem;
     padding: 0.5rem;
-    a{
+    a, p{
       color: white;
+      margin: 0;
+      padding: 0;
     }
   }
   li:last-child {
@@ -80,3 +83,19 @@
   display: flex;
   flex-direction: row;
 }
+
+.card {
+  padding: 1rem;
+  line-height: 1.8;
+  margin: 1rem;;
+  border: 1px solid #bbbbbb;
+  width: 1000px;
+  &-content {
+    display: grid;
+    grid-template-columns: 2fr 4fr 2fr;
+    grid-gap: 2rem;
+    align-items: center;
+  }
+}
+
+

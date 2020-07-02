@@ -1,7 +1,7 @@
 import re
 from django import forms
 from clinic2 import settings
-from .models import CustomUser, Patient
+from .models import CustomUser, Patient, Doctor
 
 
 def short_pass_validation(value):
@@ -73,48 +73,72 @@ class DoctorSignUpForm(RegistrationMixin):
 class PatientBioForm(forms.ModelForm):
     birth_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS,
                                  widget=forms.DateTimeInput(format="%d %m %Y",
-                                                            attrs={'placeholder': '01 02 1990'}))
+                                                            attrs={'placeholder': '01 02 1990'}), required=False)
     phone_number = forms.CharField(label='Мобильный телефон',
                                    min_length=10,
                                    max_length=15,
-                                   widget=forms.TextInput(attrs={'placeholder': '+7 921 321 14 28'}))
+                                   widget=forms.TextInput(attrs={'placeholder': '+7 921 321 14 28'}), required=False)
+    citizenship = forms.CharField(required=False)
+    passport = forms.IntegerField(required=False)
+    city = forms.CharField(required=False)
+    street = forms.CharField(required=False)
+    apartment = forms.CharField(required=False)
 
     class Meta:
         model = Patient
         fields = ('name', 'surname', 'third_name', 'birth_date',
-                  'address', 'phone_number', 'user', 'avatar')
+                  'phone_number', 'user', 'avatar', 'citizenship', 'passport',
+                  'city', 'street', 'apartment')
         widgets = {'user': forms.HiddenInput}
 
     def clean_phone_number(self):
         value = self.cleaned_data['phone_number']
+        print(value)
+        print(value)
+        print(value)
+        print(value)
         pattern = re.compile(r'(^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$)')
         result = pattern.match(value)
-
+        if value == '':
+            return None
         if not result:
             raise forms.ValidationError('Invalid phone number', code='Invalid')
         return result.group()
 
 
-class BioForm(forms.Form):
+class DoctorBioForm(forms.ModelForm):
+    birth_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS,
+                                 widget=forms.DateTimeInput(format="%d %m %Y",
+                                                            attrs={'placeholder': '01 02 1990'}), required=False)
+    phone_number = forms.CharField(label='Мобильный телефон',
+                                   min_length=10,
+                                   max_length=15,
+                                   widget=forms.TextInput(attrs={'placeholder': '+7 921 321 14 28'}), required=False)
+    working_experience = forms.CharField(required=False)
+    specialty = forms.CharField(required=False)
+    citizenship = forms.CharField(required=False)
+    passport = forms.IntegerField(required=False)
+    city = forms.CharField(required=False)
+    street = forms.CharField(required=False)
+    apartment = forms.CharField(required=False)
 
-    user            = forms.ChoiceField(widget=forms.HiddenInput())
-    birth_date      = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS,
-                                      widget=forms.DateTimeInput(format="%d %m %Y",
-                                                                 attrs={'placeholder': '01 02 1990'}))
-    phone_number    = forms.CharField(label='Мобильный телефон',
-                                      min_length=10,
-                                      max_length=15,
-                                      widget=forms.TextInput(attrs={'placeholder': '+7 921 321 14 28'}))
-    name            = forms.CharField()
-    surname         = forms.CharField()
-    third_name      = forms.CharField()
-    avatar          = forms.ImageField()
+    class Meta:
+        model = Doctor
+        fields = ('name', 'surname', 'third_name', 'birth_date',
+                  'phone_number', 'user', 'avatar', 'working_experience',
+                  'specialty', 'citizenship', 'passport', 'city', 'street', 'apartment')
+        widgets = {'user': forms.HiddenInput}
 
     def clean_phone_number(self):
         value = self.cleaned_data['phone_number']
+        print(value)
+        print(value)
+        print(value)
+        print(value)
         pattern = re.compile(r'(^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$)')
         result = pattern.match(value)
-
+        if value == '':
+            return None
         if not result:
             raise forms.ValidationError('Invalid phone number', code='Invalid')
         return result.group()

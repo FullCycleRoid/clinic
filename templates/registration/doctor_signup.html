@@ -6,11 +6,6 @@
         <h1 class="large text-primary">
         Регистрация Врача
         </h1>
-        {% bootstrap_messages %}
-        {{ error }}
-        {% if error %}
-            {{ error }}
-        {% endif %}
         <div class="form-group">
             <form method="POST">
                 {% csrf_token %}
