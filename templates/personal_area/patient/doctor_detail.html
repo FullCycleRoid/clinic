@@ -1,0 +1,35 @@
+{% extends 'layout/personal_area.html' %}
+{% load static %}
+{% load thumbnail  %}
+{% block content %}
+
+<div class="profile-detail">
+  {% thumbnail doctor.avatar '200x400' as image %}
+    <img class='avatar' src="{{ image.url }}" alt="">
+  {% endthumbnail %}
+  <div>
+    <h1>{{ doctor.full_name }}</h1>
+    <p>Опыт: {{ doctor.working_experience }}</p>
+    <p>Специализация: {{ doctor.specialty }}</p>
+    <p>Возраст: {{ doctor.age }}</p>
+    <p>Цена за час: 1000 руб.</p>
+    <a href="" id="showAppointment" class="btn btn-primary">Записаться на прием</a>
+    <div id="appointment" class="card">
+        <h3 style="text-align: center">Выбирите время и дату</h3>
+        <div class="appointment">
+            <div class="calendar"></div>
+            <div id='timeslotForm'>
+
+            </div>
+        </div>
+    </div>
+  </div>
+  <div id="doctor" hidden>
+      {{ doctor.id }}
+  </div>
+  <div id="selectedDate">
+
+  </div>
+</div>
+<script src="{% static 'js/appointment.js' %}?{% now 'U' %}"></script>
+{% endblock %}

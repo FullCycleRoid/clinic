@@ -1,7 +1,7 @@
 import re
 from django import forms
 from clinic2 import settings
-from .models import CustomUser, Patient, Doctor
+from .models import CustomUser, Patient, Doctor, Appointment
 
 
 def short_pass_validation(value):
@@ -142,3 +142,12 @@ class DoctorBioForm(forms.ModelForm):
         if not result:
             raise forms.ValidationError('Invalid phone number', code='Invalid')
         return result.group()
+
+
+class AppointmentForm(forms.ModelForm):
+
+    class Meta:
+        model = Appointment
+        fields = ('timeslot', 'doctor', 'patient')
+        widgets = {'doctor': forms.HiddenInput, 'patient': forms.HiddenInput}
+

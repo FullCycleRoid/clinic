@@ -6,7 +6,6 @@
   <title>{% block title %}{% endblock %}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="manifest" href="#">
   <link rel="apple-touch-icon" href="icon.png">
   {% load static %}
   <link href="{% static 'css/style.css' %}?{% now 'U' %}" rel="stylesheet" >
@@ -42,52 +41,8 @@
         {% endif %}
     </ul>
 </div>
-{% block main %}
+{% block main %}{% endblock %}
 
 
-{% endblock %}
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-<script>
-let csrftoken = Cookies.get('csrftoken');
-function csrfSafeMethod(method) {
-// Для этих методов токен не будет подставляться в заголовок.
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-
- $.ajaxSetup({
-     beforeSend: function(xhr, settings) {
-         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                 console.log('Settings', settings)
-                 console.log('xhr', xhr)
-            }
-    }
- });
-
- $(document).ready(function(){
-     console.log('This is like script start')
-        $('a.like').click(function(e){
-            console.log('Button clicked')
-             e.preventDefault();
-             $.post('{% url "upload_image:like" %}',
-                     {id: $(this).data('id'),action: $(this).data('action'), show: console.log('status', $(this).data('status'))},
-                      function(data){
-                        if (data['status'] === 'ok'){
-                          let previous_action = $('a.like').data('action');
-
-                          $('a.like').data('action', previous_action === 'like' ?'unlike' : 'like');
-
-                          $('a.like').text(previous_action === 'like' ? 'Unlike' : 'Like');
-
-                          let previous_likes = parseInt($('span.count .total').text());
-
-                          $('span.count .total').text( previous_action === 'like' ? previous_likes + 1 : previous_likes - 1 );
-                        }
-             });
-        });
- });
-</script>
 </body>
 </html>

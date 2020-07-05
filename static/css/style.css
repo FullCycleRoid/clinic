@@ -582,12 +582,29 @@ input.qtlAnswerButtonDbl:focus, input.qtlAnswerButtonDbl:active {
   margin: 1rem;
   border: 1px solid #bbbbbb;
   width: 1000px;
+  border-radius: 10px;
 }
 .card-content {
   display: grid;
   grid-template-columns: 2fr 4fr 2fr;
   grid-gap: 2rem;
   align-items: center;
+}
+
+.avatar {
+  display: block;
+  float: left;
+  margin: 1rem;
+}
+
+.appointment {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0.5rem;
+}
+.appointment > div {
+  padding: 0.5rem;
 }
 
 /*# sourceMappingURL=style.css.map */

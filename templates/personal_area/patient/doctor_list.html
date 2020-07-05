@@ -20,10 +20,10 @@
             <p><i class="fas fa-check"></i>Специализация</p>
             <p><i class="fas fa-check"></i>Специализация</p>
             <p><i class="fas fa-check"></i>Специализация</p>
-            <button id="appointment" class="btn btn-primary">Запись к врачу</button>
+            <button class="btn btn-primary" onclick="location.href='{% url 'core:doctor-detail' pk=doctor.pk %}'">Запись к врачу</button>
           </div>
       {% endif %}
       </div>
   {% endfor %}
-  <script src="{% static 'js/appointment.js' %}"></script>
+
 {% endblock %}

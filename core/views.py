@@ -1,12 +1,15 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetDoneView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView, UpdateView, ListView, DetailView
-from .forms import LoginForm, RegistrationForm, DoctorSignUpRequestForm, DoctorSignUpForm, DoctorBioForm, PatientBioForm
+from django.views.generic import TemplateView, UpdateView, ListView, DetailView, FormView
+from .decorators import ajax_required
+from .forms import LoginForm, RegistrationForm, DoctorSignUpRequestForm, DoctorSignUpForm, DoctorBioForm, \
+    PatientBioForm, AppointmentForm
 from .models import CustomUser, Doctor, Patient
 from .utilities import send_signup_request
 
@@ -169,11 +172,25 @@ class PatientProfileView(SuccessMessageMixin, UpdateView):
 
 class DoctorList(ListView):
     model = Doctor
-    template_name = 'any_allow/doctor_list.html'
+    template_name = 'personal_area/patient/doctor_list.html'
     context_object_name = 'doctors'
 
 
-class DoctorDetail(DetailView):
+class DoctorDetail(DetailView, FormView):
     model = Doctor
-    template_name = 'any_allow/doctor_detail.html'
+    form_class = AppointmentForm
+    template_name = 'personal_area/patient/doctor_detail.html'
     context_object_name = 'doctor'
+
+
+@login_required
+@ajax_required
+def appointment(request):
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            return JsonResponse('OK')
+    else:
+        form = AppointmentForm()
+        return render(request, 'personal_area/patient/appointment_ajax.html',
+                      {'form': form})

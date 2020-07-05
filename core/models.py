@@ -1,3 +1,5 @@
+import datetime
+
 from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
@@ -64,6 +66,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
     name = models.CharField(max_length=20, verbose_name='Имя', blank=True, null=True)
+    about = models.CharField(max_length=1000, verbose_name='О себе', blank=True, null=True)
     surname = models.CharField(max_length=20, verbose_name='Фамилия', blank=True, null=True)
     third_name = models.CharField(max_length=20, verbose_name='Отчество', blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True, verbose_name='Дата рождения')
@@ -86,6 +89,14 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         self.full_address()
         super().save(*args, **kwargs)
+
+    def age(self):
+        if self.birth_date:
+            return int((datetime.datetime.now().date() - self.birth_date).days / 365.25)
+        return 'Укажите возраст в профиле'
+
+    def full_name(self):
+        return f'{self.name} {self.surname} {self.third_name}'
 
     class Meta:
         abstract = True
@@ -121,25 +132,26 @@ class Doctor(DoctorProfile):
     user.user_type = "doctor"
 
 
-# class Appointment(models.Model):
-#     TIMESLOT_LIST = (
-#         (1, '10:00 – 11:00'),
-#         (2, '11:00 – 12:00'),
-#         (3, '12:00 – 13:00'),
-#         (4, '13:00 – 14:00'),
-#         (5, '14:00 – 15:00'),
-#         (6, '15:00 – 16:00'),
-#         (7, '16:00 – 17:00'),
-#         (8, '17:00 – 18:00'),
-#         (8, '18:00 – 19:00'),
-#     )
-#
-#     timeslot = models.IntegerField(choices=TIMESLOT_LIST, null=True)
-#     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor')
-#     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient')
-#
-#     def __str__(self):
-#         return str(self.doctor) + " " + str(self.patient) + " - " + str(self.get_timeslot_display())
+class Appointment(models.Model):
+    TIMESLOT_LIST = (
+        (1, '10:00 – 11:00'),
+        (2, '11:00 – 12:00'),
+        (3, '12:00 – 13:00'),
+        (4, '13:00 – 14:00'),
+        (5, '14:00 – 15:00'),
+        (6, '15:00 – 16:00'),
+        (7, '16:00 – 17:00'),
+        (8, '17:00 – 18:00'),
+        (8, '18:00 – 19:00'),
+    )
+
+    date = models.DateTimeField(blank=True, null=True)
+    timeslot = models.IntegerField(choices=TIMESLOT_LIST, default=1, verbose_name='Время')
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor')
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient')
+
+    def __str__(self):
+        return str(self.doctor) + " " + str(self.patient) + " - " + str(self.get_timeslot_display())
 
 
 @receiver(post_save, sender=CustomUser)
