@@ -25,8 +25,8 @@
   <p class="form-text"><a href="{% url "core:password_reset" %}">Забыли пароль?</a></p>
   <p class="form-text">Нужен аккаунт? <a href="{% url "core:sign_up" %}"> Зарегистрироваться</a></p>
   <div id="social">
-      <a href="/login/vk-oauth2"><img src="{% static 'default_images/vk-social-network-logo.png' %}" data-toggle="tooltip" width="64px" height="64px"></a>
-      <a href="{% url "social:begin" "google-oauth2" %}"><img src="{% static 'default_images/brands-and-logotypes.png' %}" data-toggle="tooltip" width="64" height="64"></a>
+      <a href="/login/vk-oauth2"><img src="{% static 'images/vk-social-network-logo.png' %}" data-toggle="tooltip" width="64px" height="64px"></a>
+      <a href="{% url "social:begin" "google-oauth2" %}"><img src="{% static 'images/brands-and-logotypes.png' %}" data-toggle="tooltip" width="64" height="64"></a>
   </div>
 </section>
 {% endblock %}

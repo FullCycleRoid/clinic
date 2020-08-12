@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'personal_area',
     'psy_tests',
     'nested_admin',
-    'upload_image',
     'sorl.thumbnail',
+    'payment'
 ]
 
 MIDDLEWARE = [
@@ -78,12 +78,13 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.vk.VKOAuth2',    # бекенд авторизации через ВКонтакте
+    'social_core.backends.vk.VKOAuth2',  # бекенд авторизации через ВКонтакте
     'social_core.backends.google.GoogleOpenId',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.google.GoogleOAuth',
 
-    'django.contrib.auth.backends.ModelBackend', # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
+    'django.contrib.auth.backends.ModelBackend',
+# бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
 )
 
 WSGI_APPLICATION = 'clinic2.wsgi.application'
@@ -156,14 +157,24 @@ EMAIL_HOST_PASSWORD = 'password'
 DEFAULT_FROM_EMAIL = 'Task Board'
 DEFAULT_TO_EMAIL = 'localhost@gmail.com'
 
-
 LOGIN_REDIRECT_URL = 'main/'
-
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
-
 SOCIAL_AUTH_VK_OAUTH2_KEY = 'ID приложения'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'Защищённый ключ'
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+
+# Настройки Braintree.
+BRAINTREE_MERCHANT_ID = 'rrwzv6qq95k3z55m'  # ID продавца.
+BRAINTREE_PUBLIC_KEY = 'mtm9fchfrrcp8b8h'  # Публичный ключ.
+BRAINTREE_PRIVATE_KEY = 'c30048ed52539ade428be90105300bb5'  # Секретный ключ.
+from braintree import Configuration, Environment
+
+Configuration.configure(
+    Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_KEY,
+    BRAINTREE_PRIVATE_KEY
+)

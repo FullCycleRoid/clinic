@@ -1,10 +1,12 @@
+//Корпоративные цвета
 $primary-color: #44c767;
 $dark-color: #007241;
 $light-color: #61D7A4;
 $danger-color: #FF4900;
 $white-color: #ffffff;
 
-$max-width:1366px;
+$max-width:1200px;
+
 
 //Set text color based on the background
 @function set-text-color($color) {

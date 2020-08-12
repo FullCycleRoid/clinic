@@ -16,94 +16,56 @@
   &-white {
     @include set-background(#fff);
   }
-
 }
 
-// Text styles
-.x-large {
-  font-size: 4rem;
-  margin-bottom: 10px;
-}
-.lead {
-  font-size: 1rem;
-  margin-bottom: 15px;
-}
-
-.text-primary {
-  color: $primary-color;
-}
-
-//Buttons
-.btn {
-  @include set-background($white-color);
-  padding: 0.5rem 1.5rem;
-  margin: 0.5rem;
-  border: none;
-  width: 200px;
-  border-radius: 5px;
-  text-decoration: none;
-  outline: none;
-  transition: all 0.2s ease-in;
-  cursor: pointer;
-
-  :hover {
-      background: lighten(black, 80%)
-  }
-  &-primary {
-    @include set-background($primary-color);
-    &:hover {
-      background: lighten($primary-color, 10%)
-    }
-  }
-  &-danger {
-    @include set-background($danger-color);
-    &:hover {
-      background: darken($danger-color, 20%);
-      color: $white-color;
-    }
-  }
-  &-dark {
-    @include set-background($dark-color);
-    &:hover {
-      background: darken($dark-color, 20%)
-    }
-  }
-}
-
-//FLEX CONTAINER
-.container {
-  display: flex;
-}
-.flex-column {
-  flex-direction: column;
-}
-.flex-row {
-  flex-direction: row;
-}
-.item-center {
-  align-items: center;
-}
-
-.item-start {
-  align-items: start;
-}
-
-.item-end {
-  align-items: end;
-}
-
-.justify-center {
-  justify-content: center;
-}
-.justify-start {
-  justify-content: start;
-}
-
-.justify-end {
-  justify-content: end;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
+//
+//// Text styles
+//.x-large {
+//  font-size: 4rem;
+//  margin-bottom: 10px;
+//}
+//.lead {
+//  font-size: 1rem;
+//  margin-bottom: 15px;
+//}
+//
+//.text-primary {
+//  color: $primary-color;
+//}
+//
+////Buttons
+//.btn {
+//  @include set-background($white-color);
+//  padding: 0.5rem 1.5rem;
+//  margin: 0.5rem;
+//  border: none;
+//  width: 200px;
+//  border-radius: 5px;
+//  text-decoration: none;
+//  outline: none;
+//  transition: all 0.2s ease-in;
+//  cursor: pointer;
+//
+//  :hover {
+//      background: lighten(black, 80%)
+//  }
+//  &-primary {
+//    @include set-background($primary-color);
+//    &:hover {
+//      background: lighten($primary-color, 10%)
+//    }
+//  }
+//  &-danger {
+//    @include set-background($danger-color);
+//    &:hover {
+//      background: darken($danger-color, 20%);
+//      color: $white-color;
+//    }
+//  }
+//  &-dark {
+//    @include set-background($dark-color);
+//    &:hover {
+//      background: darken($dark-color, 20%)
+//    }
+//  }
+//}

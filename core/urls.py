@@ -28,7 +28,7 @@ urlpatterns = [
     # doctor profile
     path('doc/profile/', login_required(views.DoctorProfileView.as_view()), name='doctor-profile'),
     path('patient/profile/', login_required(views.PatientProfileView.as_view()), name='patient-profile'),
-    path('doc_list/', views.DoctorList.as_view(), name='doctor-list'),
-    path('doc_detail/<int:pk>/', views.DoctorDetail.as_view(), name='doctor-detail'),
-    path('appointment/', views.appointment, name='appointment'),
+    path('doc_list/', login_required(views.DoctorList.as_view()), name='doctor-list'),
+    path('doc_detail/<int:pk>/', login_required(views.DoctorDetail.as_view()), name='doctor-detail'),
+    path('appointment/', views.appointment, name='appointment')
 ]

@@ -1,5 +1,9 @@
 import re
 from django import forms
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 from clinic2 import settings
 from .models import CustomUser, Patient, Doctor, Appointment
 
@@ -145,9 +149,10 @@ class DoctorBioForm(forms.ModelForm):
 
 
 class AppointmentForm(forms.ModelForm):
+    date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'], label='')
 
     class Meta:
         model = Appointment
-        fields = ('timeslot', 'doctor', 'patient')
+        fields = ('date', 'doctor', 'patient')
         widgets = {'doctor': forms.HiddenInput, 'patient': forms.HiddenInput}
 

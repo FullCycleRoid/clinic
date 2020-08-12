@@ -133,25 +133,12 @@ class Doctor(DoctorProfile):
 
 
 class Appointment(models.Model):
-    TIMESLOT_LIST = (
-        (1, '10:00 – 11:00'),
-        (2, '11:00 – 12:00'),
-        (3, '12:00 – 13:00'),
-        (4, '13:00 – 14:00'),
-        (5, '14:00 – 15:00'),
-        (6, '15:00 – 16:00'),
-        (7, '16:00 – 17:00'),
-        (8, '17:00 – 18:00'),
-        (8, '18:00 – 19:00'),
-    )
-
     date = models.DateTimeField(blank=True, null=True)
-    timeslot = models.IntegerField(choices=TIMESLOT_LIST, default=1, verbose_name='Время')
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='doctor')
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='patient')
 
     def __str__(self):
-        return str(self.doctor) + " " + str(self.patient) + " - " + str(self.get_timeslot_display())
+        return str(self.doctor) + " " + str(self.patient) + " - " + str(self.date)
 
 
 @receiver(post_save, sender=CustomUser)

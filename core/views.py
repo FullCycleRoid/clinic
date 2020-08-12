@@ -176,21 +176,33 @@ class DoctorList(ListView):
     context_object_name = 'doctors'
 
 
-class DoctorDetail(DetailView, FormView):
+class DoctorDetail(FormView, DetailView):
     model = Doctor
     form_class = AppointmentForm
     template_name = 'personal_area/patient/doctor_detail.html'
     context_object_name = 'doctor'
 
+    def get_context_data(self, **kwargs):
+        context = super(DoctorDetail, self).get_context_data(**kwargs)
+        context['form'] = self.get_form()
+        return context
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['patient'] = self.request.user.patient
+        initial['doctor'] = self.object
+        return initial
+
+    def post(self, request, *args, **kwargs):
+        return appointment(request, *args, **kwargs)
+
 
 @login_required
-@ajax_required
-def appointment(request):
+def appointment(request, *args, **kwargs):
     if request.method == 'POST':
         form = AppointmentForm(request.POST)
         if form.is_valid():
-            return JsonResponse('OK')
+            form.save()
+            return HttpResponseRedirect(reverse('core:personal_area'))
     else:
-        form = AppointmentForm()
-        return render(request, 'personal_area/patient/appointment_ajax.html',
-                      {'form': form})
+        return HttpResponseRedirect(reverse('core:doctor-list'))
