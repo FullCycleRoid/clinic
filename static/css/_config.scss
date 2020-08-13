@@ -5,12 +5,20 @@ $light-color: #61D7A4;
 $danger-color: #FF4900;
 $white-color: #ffffff;
 
-$max-width:1200px;
+
 
 
 //Set text color based on the background
 @function set-text-color($color) {
   @if(lightness($color) > 50) {
+    @return #111;
+  } @else {
+    @return #fff;
+  }
+}
+
+@function text-color-switcher($backgroundcolor) {
+  @if(lightness($backgroundcolor) > 50) {
     @return #111;
   } @else {
     @return #fff;

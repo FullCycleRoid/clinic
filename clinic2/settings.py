@@ -37,12 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admindocs',
-    'social_django',
+    # 'social_django',
     'core',
     'django_extensions',
     'bootstrap4',
     'personal_area',
-    'psy_tests',
     'nested_admin',
     'sorl.thumbnail',
     'payment'
@@ -170,11 +169,11 @@ SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 BRAINTREE_MERCHANT_ID = 'rrwzv6qq95k3z55m'  # ID продавца.
 BRAINTREE_PUBLIC_KEY = 'mtm9fchfrrcp8b8h'  # Публичный ключ.
 BRAINTREE_PRIVATE_KEY = 'c30048ed52539ade428be90105300bb5'  # Секретный ключ.
-from braintree import Configuration, Environment
-
-Configuration.configure(
-    Environment.Sandbox,
-    BRAINTREE_MERCHANT_ID,
-    BRAINTREE_PUBLIC_KEY,
-    BRAINTREE_PRIVATE_KEY
-)
+# from braintree import Configuration, Environment
+#
+# Configuration.configure(
+#     Environment.Sandbox,
+#     BRAINTREE_MERCHANT_ID,
+#     BRAINTREE_PUBLIC_KEY,
+#     BRAINTREE_PRIVATE_KEY
+# )

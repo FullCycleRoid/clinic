@@ -26,9 +26,11 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p {
   font-family: "Ubuntu", sans-serif;
   font-weight: normal;
+  padding: 0;
+  margin: 0;
 }
 
 a {
@@ -59,14 +61,6 @@ a.button.dark {
   color: #fff;
 }
 
-.text-left {
-  text-align: left;
-}
-
-.text-right {
-  text-align: right;
-}
-
 form p label {
   font-size: 14px;
   padding-bottom: 4px;
@@ -87,12 +81,22 @@ ul {
   list-style: none;
 }
 
-ul.errorlist {
-  color: #ff0000;
-  clear: both;
-  font-size: 13px;
-  margin: 0;
-  padding: 0;
+.header {
+  width: 100%;
+}
+
+.header-top {
+  background-color: #1c1c1c;
+  color: #fff;
+}
+
+.header-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-nav {
+  background-color: #44c767;
 }
 
 /*# sourceMappingURL=style.css.map */

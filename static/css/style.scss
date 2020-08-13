@@ -3,3 +3,22 @@
 @import "reset";
 @import "header";
 @import "footer";
+
+.header {
+  width:100%;
+}
+.header-top {
+  background-color: #1c1c1c;
+  color: text-color-switcher(#1c1c1c);
+}
+
+
+
+.header-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-nav {
+  background-color: $primary-color;
+}
