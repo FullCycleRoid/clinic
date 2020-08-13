@@ -88,6 +88,7 @@ ul {
 .header-top {
   background-color: #1c1c1c;
   color: #fff;
+  padding: 5px 0;
 }
 
 .header-info {
@@ -95,8 +96,44 @@ ul {
   justify-content: space-between;
 }
 
+.header-contacts {
+  display: flex;
+}
+.header-contacts div + div {
+  margin: 0 5px;
+}
+
+.header-contacts__item i + span {
+  display: inline;
+  margin: 0 5px;
+}
+
+.header-social__item {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
+.header-social__item div + div {
+  margin: 0 5px;
+}
+
 .header-nav {
   background-color: #44c767;
+}
+
+.navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-brand {
+  color: #fff;
+}
+
+.navbar-inverse {
+  background-color: #44c767;
+  border-color: #34a451;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
+  background-color: #007241;
 }
 
 /*# sourceMappingURL=style.css.map */

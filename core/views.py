@@ -43,7 +43,7 @@ def index_or_personal_area(request):
 
 
 class IndexView(TemplateView):
-    template_name = 'index.html'
+    template_name = 'pages/index.html'
 
 
 # REGISTRATION
