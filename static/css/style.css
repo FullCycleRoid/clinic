@@ -136,4 +136,28 @@ ul {
   background-color: #007241;
 }
 
+.signup-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.signup-header {
+  margin: 45px 120px;
+}
+
+.signup-submit_right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signup-submit__links {
+  margin: 20px 0;
+}
+
+.signup-submit__links h4 {
+  margin: 10px 0;
+}
+
 /*# sourceMappingURL=style.css.map */

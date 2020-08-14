@@ -32,13 +32,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">КЛИНИКА №1</a>
+              <a class="navbar-brand" href="{% url 'core:index' %}">КЛИНИКА №1</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
                 <li><a href="#">Page 3</a></li>
                 <li class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
@@ -55,7 +53,7 @@
               <ul class="nav navbar-nav navbar-right">
                 {% if not request.user.is_authenticated %}
                   <li><a href="{% url 'core:sign_in' %}"><i class="fa fa-user"></i> Войти</a></li>
-                  <li><a href="{% url 'core:sign_up' %}"><i class="fa fa-sign-in"></i> Зарегистрироваться</a></li>
+                  <li><a href="{% url 'core:sign_up' %}"><i class="fa fa-sign-in"></i> Регистрация</a></li>
                 {% else %}
                   {% if request.user.doctor %}
                     <li><a href="{% url 'core:doctor-profile' %}"><i class="fa fa-user"></i> Профиль</a></li>
@@ -70,62 +68,3 @@
         </nav>
     </div>
 </header>
-{#<header class="site-header">#}
-{#  <div class="top-bar">#}
-{#    <div class="container">#}
-{#      <div class="row">#}
-{#        <div class="col-md-6 col-sm-8">#}
-{#          <ul>#}
-{#            <li><i class="fa fa-phone" aria-hidden="true"></i> Call at: <strong>+8801719058105</strong></li>#}
-{#            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> Email us: <strong>info@heartcare.com</strong>#}
-{#            </li>#}
-{#          </ul>#}
-{#        </div>#}
-{#        <div class="col-md-6 col-sm-4 top-social"> <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>#}
-{#          <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-google-plus"#}
-{#              aria-hidden="true"></i></a> <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a> <a#}
-{#            href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a> </div>#}
-{#      </div>#}
-{#    </div>#}
-{#  </div>#}
-{#  <div class="nav-logo-area">#}
-{#    <div class="container">#}
-{#      <div class="row">#}
-{#        <div class="col-md-12">#}
-{#          <nav class="navbar navbar-default">#}
-{#            <div class="navbar-header">#}
-{#              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"#}
-{#                data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle#}
-{#                  navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span#}
-{#                  class="icon-bar"></span> </button>#}
-{#              <a class="navbar-brand" href=""><img src="{% static 'heartcare/images/logo.png' %}"#}
-{#                  alt=""></a> </div>#}
-{##}
-{#            <!-- Collect the nav links, forms, and other content for toggling -->#}
-{#            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
-{#              <ul class="nav navbar-nav">#}
-{#                <li><a href="">Home</a></li>#}
-{#                </li>#}
-{#                <li><a href="{% ">Services</a></li>#}
-{#                <li><a href="{%">Doctors</a></li>#}
-{#                <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"#}
-{#                    aria-haspopup="true" aria-expanded="false">Features <span class="fa fa-angle-down"></span></a>#}
-{#                  <ul class="dropdown-menu">#}
-{#                    <li><a href="">Gallery</a></li>#}
-{#                    <li><a href="">Faqs</a></li>#}
-{#                  </ul>#}
-{#                </li>#}
-{#                <li><a href="">Contact</a></li>#}
-{#              </ul>#}
-{##}
-{#              <ul class="nav navbar-nav navbar-right">#}
-{#                <li><a class="appoint" href="">Appointment</a></li>#}
-{#                <li> <a id="menu-toggle" href="#" class="toggle"><img src="{% static 'heartcare/images/bars.png' %}"#}
-{#                      alt=""></a> </li>#}
-{#              </ul>#}
-{#            </div>#}
-{#            <!-- /.navbar-collapse -->#}
-{#          </nav>#}
-{#        </div>#}
-{#      </div>#}
-{#</div>#}

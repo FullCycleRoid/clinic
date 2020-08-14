@@ -15,8 +15,8 @@ def short_pass_validation(value):
 
 
 class LoginForm(forms.Form):
-    email = forms.CharField(max_length=20, label='Email')
-    password = forms.CharField(widget=forms.PasswordInput, label='Password', validators=[short_pass_validation, ])
+    email = forms.CharField(max_length=20, label='Почта', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), label='Пароль', validators=[short_pass_validation, ])
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -28,10 +28,10 @@ class LoginForm(forms.Form):
 
 
 class RegistrationMixin(forms.Form):
-    email = forms.CharField(max_length=20, label='Email')
+    email = forms.CharField(max_length=20, label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
-    password = forms.CharField(widget=forms.PasswordInput, label='Password')
-    password1 = forms.CharField(widget=forms.PasswordInput, label='Confirm password')
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), label='Пароль')
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), label='Подтверждение пароля')
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -71,7 +71,7 @@ class DoctorSignUpRequestForm(forms.Form):
 
 
 class DoctorSignUpForm(RegistrationMixin):
-    user_type = forms.CharField(initial='doctor', widget=forms.HiddenInput())
+    user_type = forms.CharField(initial='doctor', widget=forms.HiddenInput(), label='')
 
 
 class PatientBioForm(forms.ModelForm):

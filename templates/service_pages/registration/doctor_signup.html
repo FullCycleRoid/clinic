@@ -1,0 +1,27 @@
+{% extends 'layout/base.html' %}
+
+{% load static %}
+{% block content %}
+
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-inner">
+                    <h1 class="signup-header"><i class="fa fa-sign-in"></i> Регистрация Врача</h1>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group row">
+                                <label for="" class="col-sm-4 col-form-label"> {{ field.label }}</label>
+                                <div class="col-sm-8">
+                                    {{ field }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <input type='submit' value="Submit" class="signup-submit_right">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

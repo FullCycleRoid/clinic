@@ -57,12 +57,12 @@ def login_view(request):
             if user:
                 login(request, user)
                 return HttpResponseRedirect(reverse('core:personal_area'))
-            return render(request, 'registration/signin.html', {'form': form})
+            return render(request, 'service_pages/registration/signin.html', {'form': form})
         else:
             form = LoginForm(request.POST)
-            return render(request, 'registration/signin.html', {'form': form})
+            return render(request, 'service_pages/registration/signin.html', {'form': form})
     form = LoginForm()
-    return render(request, 'registration/signin.html', {'form': form})
+    return render(request, 'service_pages/registration/signin.html', {'form': form})
 
 
 def registration_view(request):
@@ -75,10 +75,10 @@ def registration_view(request):
             return HttpResponseRedirect(reverse('core:sign_in'))
         else:
             form = RegistrationForm(initial=form.cleaned_data)
-            return render(request, 'registration/signup.html', {'form': form})
+            return render(request, 'service_pages/registration/signup.html', {'form': form})
     else:
         form = RegistrationForm()
-        return render(request, 'registration/signup.html', {'form': form})
+        return render(request, 'service_pages/registration/signup.html', {'form': form})
 
 
 def doctor_signup(request):
@@ -89,10 +89,10 @@ def doctor_signup(request):
                                            password=form.cleaned_data['password'],
                                            user_type=form.cleaned_data['user_type'])
             return HttpResponseRedirect(reverse('core:sign_in'))
-        return render(request, 'registration/doctor_signup.html', {'form': form})
+        return render(request, 'service_pages/registration/doctor_signup.html', {'form': form})
     else:
         form = DoctorSignUpForm()
-        return render(request, 'registration/doctor_signup.html', {'form': form})
+        return render(request, 'service_pages/registration/doctor_signup.html', {'form': form})
 
 
 def signout_view(request):
@@ -110,14 +110,14 @@ def doctor_signup_request(request):
             send_signup_request(email, phone_number)
             title = 'Форма отправлена'
             body = 'Менеджер скоро свяжется с вами'
-            return render(request, 'service/thanks.html', {'title': title, 'body': body})
+            return render(request, 'service_pages/thanks.html', {'title': title, 'body': body})
         else:
             messages.error(request, 'Введите корректный номер телефона')
             form = DoctorSignUpRequestForm()
-            return render(request, 'registration/doctor_signup.html', {'form': form})
+            return render(request, 'service_pages/registration/doctor_signup.html', {'form': form})
     else:
         form = DoctorSignUpRequestForm()
-        return render(request, 'registration/doctor_signup.html', {'form': form})
+        return render(request, 'service_pages/registration/doctor_signup.html', {'form': form})
 
 
 class UserPasswordChangeView(PasswordChangeView):

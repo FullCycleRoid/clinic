@@ -1,23 +1,12 @@
-{% extends 'layout/personal_area.html' %}
+{% extends 'layout/base.html' %}
 
 {% block content %}
-
-    <div>
+    <div class="container">
+        <div class="row">
             <p class="lead">Личный кабинет Пациента</p>
             <a class="btn btn-primary">пройти тест</a>
             <a class="btn btn-primary">Результаты тестов</a>
             <a class="btn btn-primary">запись к врачу</a>
         <div class="content">
-            {% with total_images_created=request.user.images_created.count %}
-            <p>Welcome to your dashboard. You have bookmarked
-            {{total_images_created }} image{{ total_images_created|pluralize }}.</p>
-            {% endwith %}
-            <p>Drag the following button to your bookmarks toolbar to bookmark images
-            from other websites
-            <a href="javascript:{% include "bookmarklet_launcher.js" %}" class="button">
-            Bookmark it</a>
-            <p>
-        </div>
     </div>
-
 {% endblock %}
