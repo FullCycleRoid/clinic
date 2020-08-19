@@ -3,6 +3,7 @@
 @import "reset";
 @import "header";
 @import "footer";
+@import "variables";
 
 .header {
   width:100%;
@@ -78,4 +79,9 @@
 
 .signup-submit__links h4{
   margin: 10px 0;
+}
+
+.doctors-title {
+  font-size: 20px;
+  margin: 20px 0;
 }

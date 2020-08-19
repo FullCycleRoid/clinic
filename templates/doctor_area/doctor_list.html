@@ -1,0 +1,43 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% load thumbnail %}
+{% block content %}
+    <section class="doctors-list">
+        <div class="container">
+            <div class="doctors-title">
+                <h1 class="doctors-title text-primary">Все врачи</h1>
+            </div>
+            {% for doctor in doctors %}
+                <div class="card d-flex flex-row justify-content-between p-2">
+                    <div id='doctor-{{ doctor.id }}' class="">
+                        {% if 'images' in doctor.avatar.url %}
+                            {% thumbnail doctor.avatar '200x200' crop='center' as image %}
+                                <img src="{{ image.url }}" alt="">
+                            {% endthumbnail %}
+                    </div>
+                    <div>
+                        <span>
+                          {{ doctor.name }} {{ doctor.surname }} {{ doctor.third_name }}
+                        </span>
+                                    <p>Возраст: 32432423</p>
+                                    <p>Телефон:234234</p>
+                                    <p>Телефон:234234</p>
+                                    <p>Телефон:234234</p>
+                    </div>
+                    <div>
+                        <p><i class="fa fa-check"></i>Специализация</p>
+                        <p><i class="fa fa-check"></i>Специализация</p>
+                        <p><i class="fa fa-check"></i>Специализация</p>
+                        <a class="btn btn-primary"
+                           {% if request.user.is_authenticated %}
+                             href="{% url 'core:doctor-detail' pk=doctor.pk %}">Записаться</a>
+                           {% else %}
+                             href="{% url 'core:sign_in'%}">Записаться</a>
+                           {% endif %}
+                    </div>
+                  {% endif %}
+              </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

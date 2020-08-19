@@ -170,16 +170,17 @@ class PatientProfileView(SuccessMessageMixin, UpdateView):
         return context
 
 
+
 class DoctorList(ListView):
     model = Doctor
-    template_name = 'personal_area/patient/doctor_list.html'
+    template_name = 'doctor_area/doctor_list.html'
     context_object_name = 'doctors'
 
 
 class DoctorDetail(FormView, DetailView):
     model = Doctor
     form_class = AppointmentForm
-    template_name = 'personal_area/patient/doctor_detail.html'
+    template_name = 'doctor_area/doctor_detail.html'
     context_object_name = 'doctor'
 
     def get_context_data(self, **kwargs):
@@ -203,6 +204,9 @@ def appointment(request, *args, **kwargs):
         form = AppointmentForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('core:personal_area'))
-    else:
-        return HttpResponseRedirect(reverse('core:doctor-list'))
+            date = form.cleaned_data['date']
+            doctor = form.cleaned_data['doctor']
+            return render(request, 'service_pages/thanks_appointment.html', {'date': date, 'doctor': doctor})
+        return HttpResponseRedirect(reverse('core:all-doctors'))
+    return HttpResponseRedirect(reverse('core:all-doctors'))
+

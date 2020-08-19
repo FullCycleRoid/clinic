@@ -1,0 +1,13 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col">
+                <p class="lead">Личный кабинет Пациента</p>
+                <a href="" class="btn btn-primary">пройти тест</a>
+                <a href="" class="btn btn-primary">Результаты тестов</a>
+                <a href="{% url 'core:all-doctors' %}" class="btn btn-primary">Все врачи</a>
+            </div>
+    </div>
+{% endblock %}

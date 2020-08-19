@@ -98,6 +98,9 @@ class Profile(models.Model):
     def full_name(self):
         return f'{self.name} {self.surname} {self.third_name}'
 
+    def __str__(self):
+        return self.full_name()
+
     class Meta:
         abstract = True
 

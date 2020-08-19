@@ -1,0 +1,33 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% load thumbnail  %}
+{% block content %}
+
+<div class="container">
+    <div class="card my-5">
+        <div class="row">
+            <div class="col-3">
+                {% thumbnail doctor.avatar '200x400' as image %}
+                <img class='avatar' src="{{ image.url }}" alt="">
+                {% endthumbnail %}
+            </div>
+            <div class="col-6">
+                <h1>{{ doctor.full_name }}</h1>
+                <p>Опыт: {{ doctor.working_experience }}</p>
+                <p>Специализация: {{ doctor.specialty }}</p>
+                <p>Возраст: {{ doctor.age }}</p>
+                <p>Цена за час: 1000 руб.</p>
+            </div>
+            <div class="col-3">
+                <h3>Выбирите время и дату приема</h3>
+                <form action="{% url 'core:appointment' %}" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Записаться">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,19 +1,9 @@
 {% extends 'layout/base.html' %}
 {%  load static %}
 {% block content %}
-<section class="landing bg-primary">
-  <div class="dark-overlay">
-    <div class="landing-inner">
-      <div class="x-large">PSY  #1</div>
-      <div class="lead">Make your life better</div>
-      <div>
-        <a href="#" class="btn">Пройти тест</a>
-        <a href="#" class="btn btn-danger">registration</a>
-      </div>
-    </div>
-  </div>
-</section>
+
 <div class="container">
+    <a href="{% url 'core:all-doctors' %}" class="btn btn-primary">Все врачи</a>
     <h3>Психологическая поддержка и развитие EQ.</h3>
     <h4>
         Психологические тесты > Оценка типа и состояния психики <br>

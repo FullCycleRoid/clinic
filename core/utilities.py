@@ -13,6 +13,6 @@ def send_signup_request(recipient_email, phone_number):
     print(host)
     context = {'email': recipient_email, 'phone_number': phone_number}
 
-    body_text = render_to_string('mail/doctor_signup_body.txt', context)
+    body_text = render_to_string('service_pages/mail/doctor_signup_body.txt', context)
     subject = 'Doctor sing up request'
     send_mail(subject, body_text, DEFAULT_TO_EMAIL, [DEFAULT_TO_EMAIL,])

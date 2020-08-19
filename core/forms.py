@@ -149,7 +149,7 @@ class DoctorBioForm(forms.ModelForm):
 
 
 class AppointmentForm(forms.ModelForm):
-    date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'], label='')
+    date = forms.DateTimeField(input_formats=['%d.%m.%Y %H:%M'], label='')
 
     class Meta:
         model = Appointment
