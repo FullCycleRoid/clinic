@@ -1,7 +1,6 @@
 import nested_admin
 from django.contrib import admin
-from .models import CustomUser, Doctor, Appointment
-
+from .models import CustomUser, Doctor, Appointment, MyModel
 
 # class TocChoiceInline(nested_admin.NestedStackedInline):
 #     model = Choice
@@ -23,4 +22,5 @@ from .models import CustomUser, Doctor, Appointment
 admin.site.register(CustomUser)
 admin.site.register(Doctor)
 admin.site.register(Appointment)
+admin.site.register(MyModel)
 

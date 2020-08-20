@@ -8,3 +8,4 @@ docutils==0.16
 django-nested-admin==3.3.1
 social-auth-app-django==2.1.0
 sorl-thumbnail==12.6.3
+django-celery 3.3.1

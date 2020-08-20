@@ -159,3 +159,7 @@ def save_user_profile(sender, instance, **kwargs):
         instance.doctor.save()
     elif instance.user_type == "patient":
         instance.patient.save()
+
+
+class MyModel(models.Model):
+    text = models.CharField(max_length=100)
