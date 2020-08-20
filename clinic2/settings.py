@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from datetime import timedelta
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES_DIRS = os.path.join(BASE_DIR, 'templates')
 
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.admindocs',
     # 'social_django',
+    'psycopg2',
     'core',
     'django_extensions',
     'bootstrap4',
@@ -45,7 +48,6 @@ INSTALLED_APPS = [
     'nested_admin',
     'sorl.thumbnail',
     'payment',
-    "djcelery",
 ]
 
 MIDDLEWARE = [
@@ -182,7 +184,9 @@ BRAINTREE_PRIVATE_KEY = 'c30048ed52539ade428be90105300bb5'  # Секретный
 
 # CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
-
-
-import djcelery
-djcelery.setup_loader()
+CELERYBEAT_SCHEDULE = {
+    'every-second': {
+        'task': 'example.say_hello',
+        'schedule': timedelta(seconds=5),
+    },
+}

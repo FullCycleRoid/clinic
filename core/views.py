@@ -7,7 +7,8 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, UpdateView, ListView, DetailView, FormView
-from .decorators import ajax_required
+
+from clinic2.celery import app
 from .forms import LoginForm, RegistrationForm, DoctorSignUpRequestForm, DoctorSignUpForm, DoctorBioForm, \
     PatientBioForm, AppointmentForm
 from .models import CustomUser, Doctor, Patient
@@ -42,13 +43,17 @@ def index_or_personal_area(request):
         return HttpResponseRedirect(reverse('core:index'))
 
 
+
 class IndexView(TemplateView):
     template_name = 'pages/index.html'
 
-from .tasks import add
 
+from .tasks import add
 # REGISTRATION
 def login_view(request):
+    result = add.delay(4, 4)
+    print(result.ready())
+    print(dir(result.backend))
     if request.method == "POST":
         form = LoginForm(data=request.POST or None)
         if form.is_valid():
