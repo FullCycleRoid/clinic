@@ -20,3 +20,7 @@ def add_to_db():
     )
     print('Text added model created')
 
+@periodic_task(run_every=timedelta(seconds=2))
+def add(x, y):
+    return x + y
+

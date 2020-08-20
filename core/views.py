@@ -45,6 +45,7 @@ def index_or_personal_area(request):
 class IndexView(TemplateView):
     template_name = 'pages/index.html'
 
+from .tasks import add
 
 # REGISTRATION
 def login_view(request):

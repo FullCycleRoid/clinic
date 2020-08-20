@@ -183,8 +183,6 @@ BRAINTREE_PRIVATE_KEY = 'c30048ed52539ade428be90105300bb5'  # Секретный
 # CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 
+
 import djcelery
 djcelery.setup_loader()
-
-CELERYBEAT_SCHEDULER="djcelery.schedulers.DatabaseScheduler"
-CELERY_ALWAYS_EAGER=False
